@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-base: #FAFAFA;
+    --bg-elevated: #F0F0F2;
+    --border-subtle: #D4D4D8;
+    --border-hover: #71717A;
+    --text-primary: #09090B;
+    --text-secondary: #3F3F46;
+    --text-muted: #71717A;
+    --accent: #09090B;
+  }
+
+  .dark {
+    --bg-base: #09090B;
+    --bg-elevated: #18181B;
+    --border-subtle: #27272A;
+    --border-hover: #52525B;
+    --text-primary: #FAFAFA;
+    --text-secondary: #D4D4D8;
+    --text-muted: #A1A1AA;
+    --accent: #FAFAFA;
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-inter), sans-serif;
+    transition: background-color 200ms ease, color 200ms ease;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--text-primary);
+    color: var(--bg-base);
+  }
+}
+
+/* Custom scrollbar for modern developer aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
