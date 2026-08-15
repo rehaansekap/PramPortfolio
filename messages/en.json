@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "admin": "Admin"
+  },
+  "hero": {
+    "greeting": "Hello, I am",
+    "role": "Backend Developer | Full-Stack Engineer | UI/UX Enthusiast",
+    "viewProjects": "View Projects",
+    "downloadCv": "Download CV",
+    "contactMe": "Get In Touch",
+    "scrollDown": "Scroll down"
+  },
+  "aboutSnapshot": {
+    "sectionNumber": "01",
+    "heading": "About Me",
+    "readMore": "Read more about me"
+  },
+  "skills": {
+    "sectionNumber": "02",
+    "heading": "Technical Skills",
+    "categories": {
+      "backend": "Backend & API",
+      "frontend": "Frontend",
+      "database": "Databases",
+      "tool": "Tools & DevOps",
+      "softskill": "Soft Skills"
+    }
+  },
+  "featuredProjects": {
+    "sectionNumber": "03",
+    "heading": "Featured Projects",
+    "viewAll": "View All Projects",
+    "caseStudy": "Read Case Study",
+    "viewCode": "View Source",
+    "viewLive": "Live Demo"
+  },
+  "experienceHighlight": {
+    "sectionNumber": "04",
+    "heading": "Recent Experience",
+    "viewAll": "View Full Timeline",
+    "present": "Present"
+  },
+  "achievements": {
+    "sectionNumber": "05",
+    "heading": "Certifications & Honors"
+  },
+  "contact": {
+    "sectionNumber": "06",
+    "heading": "Let's Connect",
+    "subheading": "Interested in discussing job opportunities, scalable backend engineering, or collaborative technical projects? Feel free to reach out.",
+    "emailMe": "Send Email",
+    "whatsappMe": "Chat on WhatsApp",
+    "copyEmail": "Copy Email",
+    "copied": "Email Copied!"
+  },
+  "projectsPage": {
+    "heading": "Project Archive",
+    "description": "A curated collection of backend architectures, full-stack systems, mobile apps, and UI/UX explorations.",
+    "filter": {
+      "all": "All",
+      "backend": "Backend",
+      "fullstack": "Full-Stack",
+      "ui-ux": "UI/UX",
+      "mobile": "Mobile"
+    },
+    "empty": "No projects found in this category."
+  },
+  "projectDetail": {
+    "back": "Back to Project Archive",
+    "role": "Role",
+    "timeline": "Timeline",
+    "techStack": "Tech Stack",
+    "liveDemo": "Live Demo",
+    "sourceCode": "Repository",
+    "problemTitle": "Context & Problem",
+    "contributionTitle": "My Role & Contributions",
+    "outcomeTitle": "Results & Impact",
+    "galleryTitle": "Interface Gallery",
+    "prev": "Previous Project",
+    "next": "Next Project"
+  },
+  "aboutPage": {
+    "heading": "About Me",
+    "bioTitle": "Background",
+    "educationTitle": "Education & Bootcamps",
+    "workTitle": "Professional Work & Internships",
+    "teachingTitle": "Teaching & Academic Assistance",
+    "orgTitle": "Organizations & Leadership",
+    "certsTitle": "Certifications & Awards",
+    "downloadCv": "Download Full CV (PDF)",
+    "present": "Present",
+    "gpa": "GPA"
+  },
+  "footer": {
+    "builtWith": "Crafted with Next.js App Router, Tailwind CSS, and Supabase.",
+    "rights": "All rights reserved."
+  }
+}

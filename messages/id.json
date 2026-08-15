@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "projects": "Proyek",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "admin": "Admin"
+  },
+  "hero": {
+    "greeting": "Halo, saya",
+    "role": "Backend Developer | Full-Stack Engineer | Peminat UI/UX",
+    "viewProjects": "Lihat Proyek",
+    "downloadCv": "Unduh CV",
+    "contactMe": "Hubungi Saya",
+    "scrollDown": "Gulir ke bawah"
+  },
+  "aboutSnapshot": {
+    "sectionNumber": "01",
+    "heading": "Tentang Saya",
+    "readMore": "Selengkapnya tentang saya"
+  },
+  "skills": {
+    "sectionNumber": "02",
+    "heading": "Keahlian Teknis",
+    "categories": {
+      "backend": "Backend & API",
+      "frontend": "Frontend",
+      "database": "Database",
+      "tool": "Alat & DevOps",
+      "softskill": "Soft Skills"
+    }
+  },
+  "featuredProjects": {
+    "sectionNumber": "03",
+    "heading": "Proyek Pilihan",
+    "viewAll": "Lihat Semua Proyek",
+    "caseStudy": "Baca Case Study",
+    "viewCode": "Lihat Kode",
+    "viewLive": "Kunjungi Demo"
+  },
+  "experienceHighlight": {
+    "sectionNumber": "04",
+    "heading": "Pengalaman Terbaru",
+    "viewAll": "Lihat Riwayat Lengkap",
+    "present": "Sekarang"
+  },
+  "achievements": {
+    "sectionNumber": "05",
+    "heading": "Sertifikasi & Penghargaan"
+  },
+  "contact": {
+    "sectionNumber": "06",
+    "heading": "Mari Berkolaborasi",
+    "subheading": "Tertarik mendiskusikan peluang kerja, proyek backend skala besar, atau kolaborasi teknis? Jangan ragu untuk menghubungi saya.",
+    "emailMe": "Kirim Email",
+    "whatsappMe": "Chat WhatsApp",
+    "copyEmail": "Salin Email",
+    "copied": "Email Disalin!"
+  },
+  "projectsPage": {
+    "heading": "Arsip Proyek",
+    "description": "Koleksi proyek backend, full-stack, mobile, dan eksplorasi UI/UX yang telah saya bangun.",
+    "filter": {
+      "all": "Semua",
+      "backend": "Backend",
+      "fullstack": "Full-Stack",
+      "ui-ux": "UI/UX",
+      "mobile": "Mobile"
+    },
+    "empty": "Tidak ada proyek ditemukan dalam kategori ini."
+  },
+  "projectDetail": {
+    "back": "Kembali ke Arsip Proyek",
+    "role": "Peran",
+    "timeline": "Waktu Pengerjaan",
+    "techStack": "Tech Stack",
+    "liveDemo": "Live Demo",
+    "sourceCode": "Repositori",
+    "problemTitle": "Konteks & Masalah",
+    "contributionTitle": "Peran & Kontribusi Saya",
+    "outcomeTitle": "Hasil & Dampak",
+    "galleryTitle": "Galeri Antarmuka",
+    "prev": "Proyek Sebelumnya",
+    "next": "Proyek Berikutnya"
+  },
+  "aboutPage": {
+    "heading": "Tentang Saya",
+    "bioTitle": "Latar Belakang",
+    "educationTitle": "Pendidikan Formal & Bootcamp",
+    "workTitle": "Pengalaman Kerja & Magang",
+    "teachingTitle": "Pengalaman Mengajar & Asistensi",
+    "orgTitle": "Pengalaman Organisasi & Kepemimpinan",
+    "certsTitle": "Sertifikasi & Penghargaan",
+    "downloadCv": "Unduh CV Lengkap (PDF)",
+    "present": "Sekarang",
+    "gpa": "IPK"
+  },
+  "footer": {
+    "builtWith": "Dibangun dengan Next.js App Router, Tailwind CSS, dan Supabase.",
+    "rights": "Hak Cipta Dilindungi."
+  }
+}
