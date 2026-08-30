@@ -3,10 +3,14 @@
 import { useTranslations, useLocale } from "next-intl";
 import { Profile } from "@/types/portfolio";
 import { Link } from "@/i18n/routing";
-import { ArrowDown, ArrowUpRight, Download, Mail, ExternalLink } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Mail, ExternalLink, Box, User } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/common/icons";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
+import { ParticleNetwork } from "@/components/3d/particle-network";
+import { ServerNode3D } from "@/components/3d/server-node-3d";
+import { ScrambleText } from "@/components/common/scramble-text";
 
 interface HeroSectionProps {
   profile: Profile;
@@ -16,28 +20,32 @@ export function HeroSection({ profile }: HeroSectionProps) {
   const t = useTranslations("hero");
   const locale = useLocale() as "id" | "en";
   const tagline = locale === "en" ? profile.tagline_en : profile.tagline_id;
+  const [visualMode, setVisualMode] = useState<"3d" | "photo">("3d");
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center py-16 sm:py-24 border-b border-border-subtle">
-      {/* Subtle background tech grid pattern */}
+    <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center py-16 sm:py-24 border-b border-border-subtle overflow-hidden">
+      {/* Background Interactive Data Constellation Canvas */}
+      <ParticleNetwork className="absolute inset-0 pointer-events-none opacity-60 dark:opacity-40" />
+
+      {/* Subtle tech grid pattern */}
       <div className="absolute inset-0 -z-10 opacity-[0.03] dark:opacity-[0.05] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Text Content */}
-          <div className="lg:col-span-8 flex flex-col items-start">
+          {/* Left: Text Content */}
+          <div className="lg:col-span-7 flex flex-col items-start">
             {/* Availability status badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded border border-border-subtle bg-bg-elevated font-mono text-xs text-text-secondary mb-6"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded border border-border-subtle bg-bg-elevated font-mono text-xs text-text-secondary mb-6 shadow-xs"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>OPEN FOR BACKEND & FULL-STACK ROLES</span>
+              <ScrambleText text="OPEN FOR BACKEND & FULL-STACK ROLES" />
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Main Headline with Scramble Animation */}
             <motion.h1
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -47,7 +55,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
               <span className="text-text-muted font-normal text-2xl sm:text-3xl block mb-2">
                 {t("greeting")}
               </span>
-              {profile.name}
+              <ScrambleText text={profile.name} triggerOnHover={true} />
             </motion.h1>
 
             {/* Tagline */}
@@ -69,7 +77,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
             >
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded bg-accent text-bg-base font-semibold text-sm hover:opacity-90 transition-opacity tracking-wide"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded bg-accent text-bg-base font-semibold text-sm hover:opacity-90 transition-opacity tracking-wide shadow-xs"
               >
                 {t("viewProjects")}
                 <ArrowUpRight className="w-4 h-4" />
@@ -79,7 +87,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
                 href={profile.cv_file_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded border border-border-subtle hover:border-border-hover bg-bg-elevated text-text-primary font-mono text-xs sm:text-sm transition-colors duration-150"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded border border-border-subtle hover:border-border-hover bg-bg-elevated text-text-primary font-mono text-xs sm:text-sm transition-colors duration-150 shadow-xs"
               >
                 <Download className="w-4 h-4 text-text-muted" />
                 {t("downloadCv")}
@@ -87,7 +95,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
 
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 px-4 py-3 rounded border border-border-subtle hover:border-border-hover text-text-muted hover:text-text-primary text-sm transition-colors duration-150"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded border border-border-subtle hover:border-border-hover text-text-secondary hover:text-text-primary text-sm transition-colors duration-150 bg-bg-base shadow-xs"
                 aria-label="Send direct email"
               >
                 <Mail className="w-4 h-4" />
@@ -99,9 +107,9 @@ export function HeroSection({ profile }: HeroSectionProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-10 flex items-center gap-6 text-text-muted font-mono text-xs"
+              className="mt-10 flex items-center gap-6 text-text-secondary font-mono text-xs"
             >
-              <span className="text-border-hover uppercase tracking-wider">CONNECT:</span>
+              <span className="text-text-muted uppercase tracking-wider font-semibold">CONNECT:</span>
               <a
                 href={profile.linkedin_url}
                 target="_blank"
@@ -123,34 +131,70 @@ export function HeroSection({ profile }: HeroSectionProps) {
             </motion.div>
           </div>
 
-          {/* Portrait Photo / Avatar Frame */}
+          {/* Right: Interactive 3D Server Node & Photo HUD */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-4 flex justify-center lg:justify-end"
+            className="lg:col-span-5 flex flex-col items-center justify-center"
           >
-            <div className="relative group w-64 h-80 sm:w-72 sm:h-96">
-              {/* Outer decorative monospace border frame */}
-              <div className="absolute -inset-2 border border-border-subtle group-hover:border-border-hover transition-colors rounded pointer-events-none" />
-              <div className="absolute -top-3 -left-2 bg-bg-base px-2 font-mono text-[10px] text-text-muted">
-                RSP // DEV
-              </div>
-              <div className="absolute -bottom-3 -right-2 bg-bg-base px-2 font-mono text-[10px] text-text-muted">
-                BANDUNG, ID
+            <div className="w-full max-w-[360px] sm:max-w-[400px] rounded border border-border-subtle bg-bg-elevated/60 backdrop-blur-md p-4 shadow-sm flex flex-col items-center">
+              {/* Mode Switcher Tabs */}
+              <div className="w-full flex items-center justify-between pb-3 mb-2 border-b border-border-subtle font-mono text-xs">
+                <span className="text-[11px] font-bold text-text-primary tracking-wider flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                  INTERACTIVE VIEW
+                </span>
+
+                <div className="inline-flex rounded border border-border-subtle p-0.5 bg-bg-base">
+                  <button
+                    type="button"
+                    onClick={() => setVisualMode("3d")}
+                    className={`px-2.5 py-1 rounded transition-all duration-150 flex items-center gap-1.5 text-[11px] ${
+                      visualMode === "3d"
+                        ? "bg-text-primary text-bg-base font-bold shadow-xs"
+                        : "text-text-secondary hover:text-text-primary font-medium"
+                    }`}
+                  >
+                    <Box className="w-3 h-3" />
+                    <span>3D CORE</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setVisualMode("photo")}
+                    className={`px-2.5 py-1 rounded transition-all duration-150 flex items-center gap-1.5 text-[11px] ${
+                      visualMode === "photo"
+                        ? "bg-text-primary text-bg-base font-bold shadow-xs"
+                        : "text-text-secondary hover:text-text-primary font-medium"
+                    }`}
+                  >
+                    <User className="w-3 h-3" />
+                    <span>PORTRAIT</span>
+                  </button>
+                </div>
               </div>
 
-              {/* Image Container */}
-              <div className="relative w-full h-full rounded bg-bg-elevated overflow-hidden border border-border-subtle">
-                <Image
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
-                  alt={profile.name}
-                  fill
-                  sizes="(max-width: 768px) 256px, 288px"
-                  priority
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-base/80 via-transparent to-transparent opacity-60" />
+              {/* Viewport Content */}
+              <div className="w-full relative">
+                {visualMode === "3d" ? (
+                  <ServerNode3D />
+                ) : (
+                  <div className="relative w-full h-[320px] sm:h-[400px] rounded bg-bg-base overflow-hidden border border-border-subtle">
+                    <Image
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                      alt={profile.name}
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 300px, 400px"
+                      className="object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-base/80 via-transparent to-transparent opacity-60" />
+                    <div className="absolute bottom-2 left-3 font-mono text-[10px] text-text-secondary">
+                      RSP // BANDUNG, ID
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

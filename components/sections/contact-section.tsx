@@ -7,6 +7,7 @@ import { MotionWrapper } from "@/components/common/motion-wrapper";
 import { useState } from "react";
 import { Mail, Copy, Check, MessageSquare, ExternalLink } from "lucide-react";
 import { LinkedinIcon } from "@/components/common/icons";
+import { ParticleNetwork } from "@/components/3d/particle-network";
 
 interface ContactSectionProps {
   profile: Profile;
@@ -37,9 +38,10 @@ export function ContactSection({ profile }: ContactSectionProps) {
           />
         </MotionWrapper>
 
-        <div className="mt-8 p-8 sm:p-12 rounded border border-border-subtle bg-bg-elevated/40 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="mt-8 p-8 sm:p-12 rounded border border-border-subtle bg-bg-elevated/40 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-xs">
+          <ParticleNetwork className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-25" particleCount={25} />
           {/* Direct Actions */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left relative z-10">
             <span className="font-mono text-xs uppercase tracking-widest text-text-muted mb-1">
               EMAIL ADDRESS
             </span>
@@ -52,7 +54,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 relative z-10">
             {/* Direct Mailto */}
             <a
               href={`mailto:${profile.email}`}
