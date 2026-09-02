@@ -80,7 +80,7 @@ export function AboutSnapshot({ profile }: AboutSnapshotProps) {
               const Icon = item.icon;
               return (
                 <MotionWrapper key={item.title} delay={0.1 * (idx + 1)}>
-                  <div className="p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-elevated/60 transition-colors duration-200 flex items-start gap-4">
+                  <div className="p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors duration-200 flex items-start gap-4">
                     <div className="p-2 rounded bg-bg-base border border-border-subtle text-text-primary shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>

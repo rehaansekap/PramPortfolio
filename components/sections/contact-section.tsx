@@ -38,7 +38,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
           />
         </MotionWrapper>
 
-        <div className="mt-8 p-8 sm:p-12 rounded border border-border-subtle bg-bg-elevated/40 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-xs">
+        <div className="mt-8 p-8 sm:p-12 rounded border border-border-subtle bg-bg-base flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-xs">
           <ParticleNetwork className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-25" particleCount={25} />
           {/* Direct Actions */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left relative z-10">

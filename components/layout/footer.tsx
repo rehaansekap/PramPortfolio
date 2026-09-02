@@ -13,7 +13,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="w-full border-t border-border-subtle bg-bg-elevated/40 transition-colors duration-200 py-12 mt-20">
+    <footer className="w-full border-t border-border-subtle bg-bg-base transition-colors duration-200 py-12 mt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left: Branding & Status */}

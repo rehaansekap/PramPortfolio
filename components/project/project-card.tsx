@@ -24,7 +24,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     <TiltCard className="h-full">
       <Link
         href={`/projects/${project.slug}`}
-        className="group block rounded border border-border-subtle hover:border-border-hover bg-bg-elevated/40 hover:bg-bg-elevated/90 transition-all duration-300 overflow-hidden flex flex-col h-full shadow-xs"
+        className="group block rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-all duration-300 overflow-hidden flex flex-col h-full shadow-xs"
       >
         {/* 16:9 Cover Image Container */}
         <div className="relative aspect-video w-full bg-bg-base border-b border-border-subtle overflow-hidden">

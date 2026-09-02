@@ -145,7 +145,7 @@ export default async function AboutPage({
               return (
                 <div
                   key={edu.id}
-                  className="p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-elevated/30 transition-colors"
+                  className="p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
                     <div>
@@ -362,7 +362,7 @@ export default async function AboutPage({
               return (
                 <div
                   key={org.id}
-                  className="p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-elevated/40 transition-colors flex flex-col justify-between"
+                  className="p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors flex flex-col justify-between"
                 >
                   <div>
                     <div className="font-mono text-[11px] text-text-muted mb-2">

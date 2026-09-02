@@ -115,7 +115,7 @@ export default async function ProjectDetailPage({
         )}
 
         {/* Quick Info Strip Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded border border-border-subtle bg-bg-elevated/50 mb-14 font-mono text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded border border-border-subtle bg-bg-base mb-14 font-mono text-xs">
           <div>
             <span className="text-text-muted flex items-center gap-1.5 mb-1">
               <User className="w-3.5 h-3.5" />
@@ -209,7 +209,7 @@ export default async function ProjectDetailPage({
           </div>
 
           {/* 2. My Contribution (Most Important Section for Technical Recruiter) */}
-          <div className="p-8 rounded border-2 border-border-hover bg-bg-elevated/40">
+          <div className="p-8 rounded border-2 border-border-hover bg-bg-base">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded bg-accent text-bg-base">
                 <Code2 className="w-5 h-5" />

@@ -27,7 +27,7 @@ export function AchievementsStrip({ certifications }: AchievementsStripProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {certifications.map((cert, idx) => (
             <MotionWrapper key={cert.id} delay={0.08 * (idx + 1)}>
-              <div className="h-full p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-elevated/40 hover:bg-bg-elevated transition-colors duration-200 flex flex-col justify-between">
+              <div className="h-full p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors duration-200 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="w-7 h-7 rounded bg-bg-base border border-border-subtle flex items-center justify-center text-text-primary">
