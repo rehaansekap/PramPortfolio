@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { deleteStorageFile, isSupabaseStorageUrl } from "@/lib/supabase/storage";
+import { confirmDelete, showSuccess } from "@/lib/sweetalert";
 import Image from "next/image";
 import { Upload, X, Loader2, Check } from "lucide-react";
 
@@ -72,6 +73,12 @@ export function ImageUploader({
   const handleRemove = async () => {
     if (!value) return;
 
+    const confirmed = await confirmDelete({
+      title: "Hapus Foto Ini?",
+      text: "Foto akan dihapus dari sistem dan storage secara permanen.",
+    });
+    if (!confirmed) return;
+
     try {
       setDeleting(true);
       setError(null);
@@ -82,6 +89,7 @@ export function ImageUploader({
       }
 
       onChange("");
+      showSuccess("Foto Berhasil Dihapus!");
     } catch (err: any) {
       setError(err.message || "Gagal menghapus gambar");
     } finally {
@@ -117,14 +125,14 @@ export function ImageUploader({
               type="button"
               onClick={handleRemove}
               disabled={deleting || uploading}
-              className="absolute top-1.5 right-1.5 p-1 rounded bg-bg-base/80 border border-border-subtle text-text-muted hover:text-red-500 hover:bg-bg-base transition-colors disabled:opacity-50"
+              className="absolute top-2 right-2 w-7 h-7 rounded bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg border border-white/25 transition-all hover:scale-110 active:scale-95 disabled:opacity-50 z-20 cursor-pointer"
               aria-label="Remove image and delete from storage"
               title="Hapus gambar dan bersihkan dari storage"
             >
               {deleting ? (
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
               ) : (
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4 stroke-[2.5]" />
               )}
             </button>
           </div>

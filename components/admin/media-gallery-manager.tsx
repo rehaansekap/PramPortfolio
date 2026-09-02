@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { deleteStorageFile, isSupabaseStorageUrl } from "@/lib/supabase/storage";
+import { confirmDelete, showSuccess } from "@/lib/sweetalert";
 import Image from "next/image";
 import { Plus, Trash2, Image as ImageIcon, Upload, Loader2, Video, ExternalLink } from "lucide-react";
 
@@ -44,10 +45,17 @@ export function MediaGalleryManager({
 
   const handleRemove = async (index: number) => {
     const urlToRemove = mediaUrls[index];
+    const confirmed = await confirmDelete({
+      title: "Hapus Media Ini?",
+      text: "File media ini akan dihapus dari galeri dan storage secara permanen.",
+    });
+    if (!confirmed) return;
+
     if (urlToRemove && isSupabaseStorageUrl(urlToRemove)) {
       await deleteStorageFile(urlToRemove);
     }
     onChange(mediaUrls.filter((_, i) => i !== index));
+    showSuccess("Media Berhasil Dihapus!");
   };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,10 +131,11 @@ export function MediaGalleryManager({
                 <button
                   type="button"
                   onClick={() => handleRemove(idx)}
-                  className="absolute top-1 right-1 p-1 rounded bg-bg-base/90 text-text-muted hover:text-red-500 border border-border-subtle transition-colors shadow-xs"
+                  className="absolute top-1.5 right-1.5 w-7 h-7 rounded bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg border border-white/25 transition-all hover:scale-110 active:scale-95 z-20 cursor-pointer"
                   title="Hapus Media"
+                  aria-label="Hapus Media"
                 >
-                  <Trash2 className="w-3.5 h-3.5" />
+                  <Trash2 className="w-3.5 h-3.5 stroke-[2.5]" />
                 </button>
 
                 {vid && (
