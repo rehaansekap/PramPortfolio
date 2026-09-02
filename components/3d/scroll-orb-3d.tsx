@@ -337,7 +337,8 @@ export function ScrollOrb3D() {
   return (
     <div
       ref={containerRef}
-      className="fixed top-0 left-0 z-30 pointer-events-auto cursor-grab active:cursor-grabbing w-[180px] h-[180px] select-none touch-none will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(255,255,255,0.06)] group"
+      data-scroll-orb
+      className="fixed top-0 left-0 z-30 pointer-events-auto cursor-grab active:cursor-grabbing w-[180px] h-[180px] select-none touch-none will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(255,255,255,0.06)] group transition-opacity duration-200"
       title="Bola 3D Interaktif — Klik & drag untuk memutar 360°!"
     >
       <canvas

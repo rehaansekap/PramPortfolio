@@ -65,3 +65,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border-hover);
 }
+
+/* Hide 3D orb and background artifacts when lightbox overlay is open */
+body[data-lightbox-open="true"] [data-scroll-orb] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, ChevronLeft, ChevronRight, Video } from "lucide-react";
 
 export interface MediaItem {
@@ -35,8 +36,13 @@ export function MediaLightbox({
   onClose,
   onNavigate,
 }: MediaLightboxProps) {
+  const [mounted, setMounted] = useState(false);
   const total = items.length;
   const currentItem = items[currentIndex];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handlePrev = useCallback(() => {
     if (!onNavigate || total <= 1) return;
@@ -48,9 +54,13 @@ export function MediaLightbox({
     onNavigate((currentIndex + 1) % total);
   }, [currentIndex, total, onNavigate]);
 
-  // Keyboard navigation: Escape to close, ArrowLeft/Right to navigate
+  // Lock scroll, hide 3D orb, and keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
+
+    document.body.setAttribute("data-lightbox-open", "true");
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -62,27 +72,24 @@ export function MediaLightbox({
       }
     };
 
-    // Lock background scrolling
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
     window.addEventListener("keydown", handleKeyDown);
     return () => {
+      document.body.removeAttribute("data-lightbox-open");
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose, handlePrev, handleNext]);
 
-  if (!isOpen || !currentItem) return null;
+  if (!isOpen || !currentItem || !mounted) return null;
 
   const isVideo = currentItem.type === "video" || isVideoUrl(currentItem.url);
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Media Preview Lightbox"
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/98 backdrop-blur-xl p-4 sm:p-12 animate-in fade-in duration-200 select-none"
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/98 backdrop-blur-2xl p-4 sm:p-12 animate-in fade-in duration-200 select-none"
       onClick={(e) => {
         // Close if clicking outside the media container
         if (e.target === e.currentTarget) {
@@ -187,6 +194,7 @@ export function MediaLightbox({
       <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 font-mono text-[11px] text-white/50 pointer-events-none text-center">
         {total > 1 ? "Gunakan panah kiri / kanan untuk berpindah • Klik di luar untuk keluar" : "Klik di luar gambar atau tekan Esc untuk keluar"}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
