@@ -392,6 +392,8 @@ export const initialProjects: Project[] = [
     gallery_images: [
       "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
     ],
     short_description_id:
       "Sistem web end-to-end untuk membuat, mengelola, dan memverifikasi QR code dengan dashboard analitik.",
@@ -433,8 +435,11 @@ export const initialProjects: Project[] = [
     slug: "pramlearn",
     title: "PramLearn",
     cover_image_url: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80",
+    video_url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     gallery_images: [
       "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     ],
     short_description_id:
       "Platform pembelajaran kolaboratif untuk mengelola kelas, kuis, dan aktivitas kelompok dengan real-time collaboration.",

@@ -8,6 +8,7 @@ import { MotionWrapper } from "@/components/common/motion-wrapper";
 import { formatDate } from "@/lib/utils";
 import { ArrowRight, Briefcase, FileText, Download, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
+import { InteractiveMediaGrid } from "@/components/common/interactive-media-grid";
 
 interface ExperienceHighlightProps {
   experiences: Experience[];
@@ -109,26 +110,10 @@ export function ExperienceHighlight({ experiences }: ExperienceHighlightProps) {
                           <ImageIcon className="w-3.5 h-3.5 text-accent" />
                           <span>{locale === "en" ? "Media & Documentation:" : "Media & Dokumentasi:"}</span>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                          {exp.media_urls.map((url, mIdx) => (
-                            <a
-                              key={mIdx}
-                              href={url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="relative aspect-video rounded overflow-hidden border border-border-subtle hover:border-border-hover transition-colors group/media bg-bg-elevated block"
-                              title={locale === "en" ? "Click to view media" : "Klik untuk melihat media"}
-                            >
-                              <Image
-                                src={url}
-                                alt={`${exp.organization} media ${mIdx + 1}`}
-                                fill
-                                sizes="(max-width: 640px) 50vw, 240px"
-                                className="object-cover group-hover/media:scale-105 transition-transform duration-300"
-                              />
-                            </a>
-                          ))}
-                        </div>
+                        <InteractiveMediaGrid
+                          mediaUrls={exp.media_urls}
+                          altPrefix={exp.organization}
+                        />
                       </div>
                     )}
 

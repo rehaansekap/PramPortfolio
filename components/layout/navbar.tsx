@@ -34,7 +34,7 @@ export function Navbar() {
           <div className="w-6 h-6 rounded bg-text-primary text-bg-base flex items-center justify-center font-bold text-xs shadow-xs">
             <Terminal className="w-3.5 h-3.5 stroke-[2.5]" />
           </div>
-          <span className="font-bold tracking-wider text-text-primary">RAIHAN</span>
+          <span className="font-bold tracking-wider text-text-primary">PRAM</span>
           <span className="text-text-secondary text-xs group-hover:text-text-primary transition-colors font-medium">
             / dev
           </span>
@@ -48,11 +48,10 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative py-1 font-mono text-xs uppercase tracking-wider transition-colors duration-150 ${
-                  active
+                className={`relative py-1 font-mono text-xs uppercase tracking-wider transition-colors duration-150 ${active
                     ? "text-text-primary font-bold"
                     : "text-text-secondary hover:text-text-primary font-medium"
-                }`}
+                  }`}
               >
                 {item.label}
                 {active && (
@@ -90,11 +89,10 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`font-mono text-xs uppercase tracking-wider py-2.5 px-3 rounded border transition-colors ${
-                    active
+                  className={`font-mono text-xs uppercase tracking-wider py-2.5 px-3 rounded border transition-colors ${active
                       ? "border-border-hover bg-bg-base text-text-primary font-bold shadow-xs"
                       : "border-transparent text-text-secondary hover:text-text-primary font-medium"
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </Link>

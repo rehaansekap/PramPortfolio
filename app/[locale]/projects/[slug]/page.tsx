@@ -6,6 +6,8 @@ import Image from "next/image";
 import { ArrowLeft, ArrowUpRight, Calendar, User, Code2, CheckCircle2, AlertCircle, Sparkles, Video } from "lucide-react";
 import { GithubIcon } from "@/components/common/icons";
 import { Metadata } from "next";
+import { ClickableMedia } from "@/components/common/clickable-image";
+import { ProjectMediaCarousel } from "@/components/project/project-media-carousel";
 
 function isVideoUrl(url: string) {
   if (!url) return false;
@@ -111,8 +113,8 @@ export default async function ProjectDetailPage({
           </p>
         </div>
 
-        {/* Project Video Demo Showcase (if present) */}
-        {project.video_url && (
+        {/* Cover Hero Image or Video Demo */}
+        {project.video_url ? (
           <div className="mb-12">
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-accent text-bg-base font-mono text-[10px] font-bold uppercase tracking-wider">
@@ -123,33 +125,25 @@ export default async function ProjectDetailPage({
                 {locale === "en" ? "Interactive Demo Preview" : "Pratinjau Video Interaktif"}
               </span>
             </div>
-            <div className="relative aspect-video w-full rounded border border-border-subtle bg-bg-base overflow-hidden shadow-sm">
-              <video
+            <div className="w-full rounded border border-border-subtle bg-bg-base overflow-hidden shadow-sm">
+              <ClickableMedia
                 src={project.video_url}
-                controls
-                playsInline
-                className="w-full h-full object-cover"
-                poster={project.cover_image_url}
-              >
-                Browser Anda tidak mendukung pemutar video.
-              </video>
+                alt={`${project.title} Video Demo`}
+                aspectRatioClassName="aspect-video"
+              />
             </div>
           </div>
-        )}
-
-        {/* Cover Hero Image */}
-        {project.cover_image_url && !project.video_url && (
-          <div className="relative aspect-video w-full rounded border border-border-subtle bg-bg-elevated overflow-hidden mb-12 shadow-sm">
-            <Image
+        ) : project.cover_image_url ? (
+          <div className="w-full rounded border border-border-subtle bg-bg-elevated overflow-hidden mb-12 shadow-sm">
+            <ClickableMedia
               src={project.cover_image_url}
               alt={project.title}
-              fill
               priority
               sizes="(max-width: 1024px) 100vw, 896px"
-              className="object-cover"
+              aspectRatioClassName="aspect-video"
             />
           </div>
-        )}
+        ) : null}
 
         {/* Quick Info Strip Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded border border-border-subtle bg-bg-base mb-14 font-mono text-xs">
@@ -276,40 +270,16 @@ export default async function ProjectDetailPage({
           </div>
         </div>
 
-        {/* Gallery Media & Videos (if any) */}
+        {/* Gallery Media & Videos Carousel (if any) */}
         {project.gallery_images.length > 0 && (
           <div className="mt-16 pt-12 border-t border-border-subtle">
             <h2 className="font-heading text-2xl font-bold text-text-primary mb-6">
               {t("galleryTitle")}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {project.gallery_images.map((mediaUrl, idx) => {
-                const isVid = isVideoUrl(mediaUrl);
-                return (
-                  <div
-                    key={idx}
-                    className="relative aspect-video rounded border border-border-subtle bg-bg-elevated overflow-hidden"
-                  >
-                    {isVid ? (
-                      <video
-                        src={mediaUrl}
-                        controls
-                        playsInline
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <Image
-                        src={mediaUrl}
-                        alt={`${project.title} media ${idx + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 400px"
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+            <ProjectMediaCarousel
+              mediaUrls={project.gallery_images}
+              projectTitle={project.title}
+            />
           </div>
         )}
 
