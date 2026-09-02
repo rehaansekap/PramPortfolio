@@ -108,7 +108,10 @@ export function ScrollOrb3D() {
       isDragging = true;
       prevPointer = { x: e.clientX, y: e.clientY };
       userVelocity = { x: 0, y: 0 };
-      canvas.setPointerCapture?.(e.pointerId);
+      try {
+        canvas.setPointerCapture?.(e.pointerId);
+      } catch {}
+      e.stopPropagation();
     };
 
     const onPointerMove = (e: PointerEvent) => {
@@ -117,19 +120,22 @@ export function ScrollOrb3D() {
       const dy = e.clientY - prevPointer.y;
       prevPointer = { x: e.clientX, y: e.clientY };
 
-      userRotation.y += dx * 0.012;
-      userRotation.x += dy * 0.012;
-      userVelocity.y = dx * 0.012;
-      userVelocity.x = dy * 0.012;
+      userRotation.y += dx * 0.016;
+      userRotation.x += dy * 0.016;
+      userVelocity.y = dx * 0.016;
+      userVelocity.x = dy * 0.016;
     };
 
     const onPointerUp = (e: PointerEvent) => {
       if (!isDragging) return;
       isDragging = false;
-      canvas.releasePointerCapture?.(e.pointerId);
+      try {
+        canvas.releasePointerCapture?.(e.pointerId);
+      } catch {}
     };
 
     canvas.addEventListener("pointerdown", onPointerDown);
+    container.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
     window.addEventListener("pointercancel", onPointerUp);
@@ -305,6 +311,7 @@ export function ScrollOrb3D() {
       cancelAnimationFrame(animationFrameId);
       document.removeEventListener("visibilitychange", onVisibilityChange);
       canvas.removeEventListener("pointerdown", onPointerDown);
+      container.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("pointercancel", onPointerUp);
@@ -330,12 +337,12 @@ export function ScrollOrb3D() {
   return (
     <div
       ref={containerRef}
-      className="fixed top-0 left-0 z-0 pointer-events-auto cursor-grab active:cursor-grabbing w-[180px] h-[180px] select-none will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(255,255,255,0.06)] group"
+      className="fixed top-0 left-0 z-30 pointer-events-auto cursor-grab active:cursor-grabbing w-[180px] h-[180px] select-none touch-none will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(255,255,255,0.06)] group"
       title="Bola 3D Interaktif — Klik & drag untuk memutar 360°!"
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full block touch-none"
+        className="w-full h-full block touch-none pointer-events-auto cursor-grab active:cursor-grabbing"
       />
 
       {/* Floating mini status badge */}
