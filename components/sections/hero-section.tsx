@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { Profile } from "@/types/portfolio";
 import { Link } from "@/i18n/routing";
-import { ArrowDown, ArrowUpRight, Download, Mail, ExternalLink } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Mail, ExternalLink, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/common/icons";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -23,19 +23,26 @@ export function HeroSection({ profile }: HeroSectionProps) {
       {/* Subtle tech grid pattern */}
       <div className="absolute inset-0 -z-10 opacity-[0.03] dark:opacity-[0.05] pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left: Text Content */}
-          <div className="lg:col-span-8 flex flex-col items-start">
-            {/* Availability status badge */}
+          {/* Left: Headline & Bio */}
+          <div className="lg:col-span-8 flex flex-col items-start text-left">
+            {/* Availability status badge & Location Tag in Greetings */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded border border-border-subtle bg-bg-elevated font-mono text-xs text-text-secondary mb-6 shadow-xs"
+              className="flex flex-wrap items-center gap-2.5 mb-6"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <ScrambleText text="OPEN FOR BACKEND & FULL-STACK ROLES" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-border-subtle bg-bg-base font-mono text-xs text-text-secondary shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <ScrambleText text="OPEN FOR BACKEND & FULL-STACK ROLES" />
+              </div>
+
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded border border-border-subtle bg-bg-base font-mono text-xs text-text-secondary shadow-xs">
+                <MapPin className="w-3.5 h-3.5 text-accent" />
+                <span className="font-semibold text-text-primary">BANDUNG, ID</span>
+              </div>
             </motion.div>
 
             {/* Main Headline with Scramble Animation */}
@@ -124,34 +131,59 @@ export function HeroSection({ profile }: HeroSectionProps) {
             </motion.div>
           </div>
 
-          {/* Right: Clean Professional Portrait Photo Frame */}
+          {/* Right: Decorated Technical Portrait Photo Frame */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-4 flex justify-center lg:justify-end"
           >
-            <div className="relative group w-64 h-80 sm:w-72 sm:h-96">
-              {/* Outer decorative monospace border frame */}
-              <div className="absolute -inset-2 border border-border-subtle group-hover:border-border-hover transition-colors rounded pointer-events-none" />
-              <div className="absolute -top-3 -left-2 bg-bg-base px-2 font-mono text-[10px] text-text-secondary font-semibold">
-                RSP // DEV
-              </div>
-              <div className="absolute -bottom-3 -right-2 bg-bg-base px-2 font-mono text-[10px] text-text-secondary font-semibold">
-                BANDUNG, ID
+            <div className="relative group w-64 h-80 sm:w-72 sm:h-96 select-none">
+              {/* Layer 1: Background Offset Dashed Blueprint Wireframe */}
+              <div className="absolute -inset-3 border border-dashed border-border-hover/60 rounded transition-transform duration-500 group-hover:rotate-1 pointer-events-none -z-10" />
+
+              {/* Layer 2: Viewfinder Bracket Corners (Gold / Accent Accents) */}
+              <div className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-accent pointer-events-none z-20" />
+              <div className="absolute -top-1.5 -right-1.5 w-3 h-3 border-t-2 border-r-2 border-accent pointer-events-none z-20" />
+              <div className="absolute -bottom-1.5 -left-1.5 w-3 h-3 border-b-2 border-l-2 border-accent pointer-events-none z-20" />
+              <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-accent pointer-events-none z-20" />
+
+              {/* Layer 3: Technical Monospace HUD Badges */}
+              <div className="absolute -top-3.5 left-4 bg-bg-base border border-border-subtle px-2 py-0.5 rounded font-mono text-[9px] text-text-secondary font-semibold tracking-wider shadow-xs z-20 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                <span>RSP // ARCHIVE</span>
               </div>
 
-              {/* Image Container */}
-              <div className="relative w-full h-full rounded bg-bg-elevated overflow-hidden border border-border-subtle shadow-sm">
+              <div className="absolute -top-3.5 right-4 bg-bg-base border border-border-subtle px-2 py-0.5 rounded font-mono text-[9px] text-text-muted font-semibold tracking-wider shadow-xs z-20">
+                SYS: 2026
+              </div>
+
+              <div className="absolute -bottom-3.5 left-4 bg-bg-base border border-border-subtle px-2 py-0.5 rounded font-mono text-[9px] text-text-muted font-semibold tracking-wider shadow-xs z-20">
+                SCALE 1.0 // 64-BIT
+              </div>
+
+              <div className="absolute -bottom-3.5 right-4 bg-bg-base border border-border-subtle px-2 py-0.5 rounded font-mono text-[9px] text-accent font-semibold tracking-wider shadow-xs z-20 flex items-center gap-1">
+                <span>ONLINE</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              </div>
+
+              {/* Image Container with Solid Base & Clean Border */}
+              <div className="relative w-full h-full rounded bg-bg-base overflow-hidden border border-border-subtle group-hover:border-border-hover transition-colors shadow-sm">
                 <Image
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
                   alt={profile.name}
                   fill
                   priority
                   sizes="(max-width: 768px) 256px, 288px"
-                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
+                  className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-base/80 via-transparent to-transparent opacity-60" />
+                {/* Tech Vignette & Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-base/90 via-transparent to-transparent opacity-60 pointer-events-none" />
+
+                {/* Floating Bottom Center Role Tag */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-bg-base/90 border border-border-subtle px-3 py-1 rounded font-mono text-[10px] text-text-primary font-bold tracking-widest uppercase backdrop-blur-sm shadow-xs whitespace-nowrap">
+                  FULL-STACK // DEV
+                </div>
               </div>
             </div>
           </motion.div>
