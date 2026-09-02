@@ -6,6 +6,7 @@ import { saveProfile } from "@/app/admin/actions";
 import { BilingualInput } from "@/components/admin/bilingual-input";
 import { MarkdownEditor } from "@/components/admin/markdown-editor";
 import { ImageUploader } from "@/components/admin/image-uploader";
+import { CvUploader } from "@/components/admin/cv-uploader";
 import { Loader2, Check, Save } from "lucide-react";
 
 interface ProfileFormProps {
@@ -133,18 +134,11 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
           aspectRatio="4/5"
         />
 
-        <div className="flex flex-col gap-2">
-          <label className="font-mono text-xs font-semibold text-text-primary uppercase">
-            URL FILE CV (PDF)
-          </label>
-          <input
-            type="text"
-            value={profile.cv_file_url}
-            onChange={(e) => setProfile({ ...profile, cv_file_url: e.target.value })}
-            placeholder="/cv/CV_Raihan_Syeka_Pramukastie.pdf"
-            className="p-3 font-mono text-xs bg-bg-base border border-border-subtle rounded focus:outline-none focus:border-border-hover text-text-primary"
-          />
-        </div>
+        <CvUploader
+          label="File Dokumen CV (PDF / DOC)"
+          value={profile.cv_file_url}
+          onChange={(url) => setProfile({ ...profile, cv_file_url: url })}
+        />
       </div>
 
       {/* Contact & Social Links */}

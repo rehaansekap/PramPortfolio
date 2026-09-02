@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Attachment } from "@/types/portfolio";
 import { createClient } from "@/lib/supabase/client";
+import { deleteStorageFile, isSupabaseStorageUrl } from "@/lib/supabase/storage";
 import { Plus, Trash2, FileText, Upload, Loader2, Link as LinkIcon, ExternalLink } from "lucide-react";
 
 interface AttachmentsManagerProps {
@@ -34,7 +35,11 @@ export function AttachmentsManager({
     setNewUrl("");
   };
 
-  const handleRemove = (index: number) => {
+  const handleRemove = async (index: number) => {
+    const attToRemove = attachments[index];
+    if (attToRemove?.file_url && isSupabaseStorageUrl(attToRemove.file_url)) {
+      await deleteStorageFile(attToRemove.file_url);
+    }
     onChange(attachments.filter((_, i) => i !== index));
   };
 

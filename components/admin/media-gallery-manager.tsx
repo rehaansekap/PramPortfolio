@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { deleteStorageFile, isSupabaseStorageUrl } from "@/lib/supabase/storage";
 import Image from "next/image";
 import { Plus, Trash2, Image as ImageIcon, Upload, Loader2, Video, ExternalLink } from "lucide-react";
 
@@ -41,7 +42,11 @@ export function MediaGalleryManager({
     setError(null);
   };
 
-  const handleRemove = (index: number) => {
+  const handleRemove = async (index: number) => {
+    const urlToRemove = mediaUrls[index];
+    if (urlToRemove && isSupabaseStorageUrl(urlToRemove)) {
+      await deleteStorageFile(urlToRemove);
+    }
     onChange(mediaUrls.filter((_, i) => i !== index));
   };
 
