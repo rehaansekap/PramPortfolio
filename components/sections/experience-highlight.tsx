@@ -19,7 +19,7 @@ export function ExperienceHighlight({ experiences }: ExperienceHighlightProps) {
   const locale = useLocale() as "id" | "en";
 
   return (
-    <section id="experience" className="py-20 sm:py-28 border-b border-border-subtle bg-bg-elevated/20">
+    <section id="experience" className="py-16 sm:py-28 border-b border-border-subtle">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <MotionWrapper>

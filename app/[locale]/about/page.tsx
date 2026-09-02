@@ -148,7 +148,7 @@ export default async function AboutPage({
               return (
                 <div
                   key={edu.id}
-                  className="p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors"
+                  className="p-4 sm:p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
                     <div>
@@ -221,7 +221,7 @@ export default async function AboutPage({
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-xs text-text-primary transition-all duration-150 shadow-xs group/att"
                           >
                             <Download className="w-3.5 h-3.5 text-accent group-hover/att:translate-y-0.5 transition-transform" />
-                            <span className="font-medium">{att.title}</span>
+                            <span className="font-medium truncate max-w-[200px] sm:max-w-xs">{att.title}</span>
                           </a>
                         ))}
                       </div>
@@ -256,7 +256,7 @@ export default async function AboutPage({
               return (
                 <div key={exp.id} className="relative group">
                   <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-bg-base border-2 border-border-hover group-hover:border-accent transition-all duration-200" />
-                  <div className="p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors">
+                  <div className="p-4 sm:p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                       <div>
                         <h3 className="font-heading font-bold text-lg text-text-primary">
@@ -329,7 +329,7 @@ export default async function AboutPage({
                               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-xs text-text-primary transition-all duration-150 shadow-xs group/att"
                             >
                               <Download className="w-3.5 h-3.5 text-accent group-hover/att:translate-y-0.5 transition-transform" />
-                              <span className="font-medium">{att.title}</span>
+                              <span className="font-medium truncate max-w-[200px] sm:max-w-xs">{att.title}</span>
                             </a>
                           ))}
                         </div>
@@ -366,7 +366,7 @@ export default async function AboutPage({
                 return (
                   <div key={exp.id} className="relative group">
                     <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-bg-base border-2 border-border-hover group-hover:border-accent transition-all duration-200" />
-                    <div className="p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors">
+                    <div className="p-4 sm:p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                         <div>
                           <h3 className="font-heading font-bold text-lg text-text-primary">
@@ -439,7 +439,7 @@ export default async function AboutPage({
                                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-xs text-text-primary transition-all duration-150 shadow-xs group/att"
                               >
                                 <Download className="w-3.5 h-3.5 text-accent group-hover/att:translate-y-0.5 transition-transform" />
-                                <span className="font-medium">{att.title}</span>
+                                <span className="font-medium truncate max-w-[200px] sm:max-w-xs">{att.title}</span>
                               </a>
                             ))}
                           </div>
@@ -558,7 +558,7 @@ export default async function AboutPage({
             {certifications.map((cert) => (
               <div
                 key={cert.id}
-                className="p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors flex items-start justify-between gap-4"
+                className="p-4 sm:p-6 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors flex flex-col justify-between"
               >
                 <div className="flex flex-col justify-between">
                   <div>
@@ -583,7 +583,7 @@ export default async function AboutPage({
                           className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-[11px] text-text-primary transition-all duration-150 shadow-xs group/att"
                         >
                           <Download className="w-3 h-3 text-accent group-hover/att:translate-y-0.5 transition-transform" />
-                          <span className="font-medium">{att.title}</span>
+                          <span className="font-medium truncate max-w-[150px]">{att.title}</span>
                         </a>
                       ))}
                     </div>

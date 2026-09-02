@@ -53,7 +53,7 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
   ];
 
   return (
-    <section id="skills" className="py-20 sm:py-28 border-b border-border-subtle bg-bg-elevated/20">
+    <section id="skills" className="py-16 sm:py-28 border-b border-border-subtle">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <MotionWrapper>
           <SectionHeading

@@ -103,7 +103,7 @@ export default async function ProjectDetailPage({
             <span>CASE STUDY</span>
           </div>
 
-          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary">
+          <h1 className="font-heading text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary">
             {project.title}
           </h1>
 
@@ -214,7 +214,7 @@ export default async function ProjectDetailPage({
         {/* 3-Part Structured Case Study */}
         <div className="space-y-12">
           {/* 1. Problem / Context */}
-          <div className="p-8 rounded border border-border-subtle bg-bg-base">
+          <div className="p-5 sm:p-8 rounded border border-border-subtle bg-bg-base">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded bg-bg-elevated text-text-primary border border-border-subtle">
                 <AlertCircle className="w-5 h-5" />
@@ -229,7 +229,7 @@ export default async function ProjectDetailPage({
           </div>
 
           {/* 2. My Contribution (Most Important Section for Technical Recruiter) */}
-          <div className="p-8 rounded border-2 border-border-hover bg-bg-base">
+          <div className="p-5 sm:p-8 rounded border-2 border-border-hover bg-bg-base">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded bg-accent text-bg-base">
                 <Code2 className="w-5 h-5" />
@@ -244,7 +244,7 @@ export default async function ProjectDetailPage({
           </div>
 
           {/* 3. Outcome / Results */}
-          <div className="p-8 rounded border border-border-subtle bg-bg-base">
+          <div className="p-5 sm:p-8 rounded border border-border-subtle bg-bg-base">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded bg-bg-elevated text-emerald-500 border border-border-subtle">
                 <CheckCircle2 className="w-5 h-5" />
