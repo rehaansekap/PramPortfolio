@@ -134,7 +134,7 @@ export function ScrollOrb3D() {
     window.addEventListener("pointerup", onPointerUp);
     window.addEventListener("pointercancel", onPointerUp);
 
-    // 4. Smooth Lerp Position & Trajectory State
+    // 4. Smooth Liquid Lerp State
     let currentX = 40;
     let currentY = window.innerHeight * 0.25;
     let targetX = 40;
@@ -145,8 +145,14 @@ export function ScrollOrb3D() {
     let rollRotationX = 0;
     let rollRotationZ = 0;
 
-    // 5. Calculate Target Trajectory
-    const updateTargetPosition = () => {
+    // Smoothstep easing for zero-jerk continuous transition
+    const smoothStep = (t: number) => {
+      const clamped = Math.min(1, Math.max(0, t));
+      return clamped * clamped * (3 - 2 * clamped);
+    };
+
+    // 5. Target Trajectory Calculation
+    const calculateTarget = () => {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
 
@@ -177,52 +183,45 @@ export function ScrollOrb3D() {
       const footerRect = footerEl ? footerEl.getBoundingClientRect() : null;
 
       // 1. HERO: Starts on LEFT
-      if (!aboutRect || aboutRect.top > vh * 0.70) {
+      if (!aboutRect || aboutRect.top > vh * 0.72) {
         targetX = leftTrack;
         targetY = vh * 0.25;
       }
       // 2. TRANSITION 1: Di ruang kosong DI ATAS Tentang Saya (LEFT -> RIGHT)
-      // Sedikit ke atas di ruang kosong di atas judul "01 — SECTION Tentang Saya"
-      else if (aboutRect.top > vh * 0.30) {
-        const progress = Math.min(1, Math.max(0, (vh * 0.70 - aboutRect.top) / (vh * 0.40)));
-        const ease = 0.5 - 0.5 * Math.cos(progress * Math.PI);
+      else if (aboutRect.top > vh * 0.28) {
+        const progress = (vh * 0.72 - aboutRect.top) / (vh * 0.44);
+        const ease = smoothStep(progress);
         targetX = leftTrack + (rightTrack - leftTrack) * ease;
-        // Posisikan sedikit ke atas di ruang kosong antar-section
-        targetY = aboutRect.top - 65;
+        targetY = aboutRect.top - 65; // Ruang kosong di atas heading
       }
       // 3. TENTANG SAYA + KEAHLIAN TEKNIS (2 Sections on the RIGHT!)
-      else if (!projectsRect || projectsRect.top > vh * 0.70) {
+      else if (!projectsRect || projectsRect.top > vh * 0.72) {
         targetX = rightTrack;
         targetY = vh * 0.45;
       }
       // 4. TRANSITION 2: Di ruang kosong DI ATAS Proyek Pilihan (RIGHT -> LEFT)
-      // Sedikit ke atas di ruang kosong di atas judul "03 — SECTION Proyek Pilihan"
-      else if (projectsRect.top > vh * 0.30) {
-        const progress = Math.min(1, Math.max(0, (vh * 0.70 - projectsRect.top) / (vh * 0.40)));
-        const ease = 0.5 - 0.5 * Math.cos(progress * Math.PI);
+      else if (projectsRect.top > vh * 0.28) {
+        const progress = (vh * 0.72 - projectsRect.top) / (vh * 0.44);
+        const ease = smoothStep(progress);
         targetX = rightTrack - (rightTrack - leftTrack) * ease; // Kanan ke Kiri
-        // Posisikan sedikit ke atas di ruang kosong antar-section
-        targetY = projectsRect.top - 65;
+        targetY = projectsRect.top - 65; // Ruang kosong di atas heading
       }
       // 5. PROYEK PILIHAN + PENGALAMAN TERBARU (Di sisi KIRI)
-      else if (!achievementsRect || achievementsRect.top > vh * 0.70) {
+      else if (!achievementsRect || achievementsRect.top > vh * 0.72) {
         targetX = leftTrack;
         targetY = vh * 0.45;
       }
       // 6. TRANSITION 3: Setelah Pengalaman Terbaru / ke Section 5 (LEFT -> RIGHT)
-      // Sedikit ke atas di ruang kosong di atas Section 5 Sertifikasi & Penghargaan
-      else if (achievementsRect.top > vh * 0.30) {
-        const progress = Math.min(1, Math.max(0, (vh * 0.70 - achievementsRect.top) / (vh * 0.40)));
-        const ease = 0.5 - 0.5 * Math.cos(progress * Math.PI);
+      else if (achievementsRect.top > vh * 0.28) {
+        const progress = (vh * 0.72 - achievementsRect.top) / (vh * 0.44);
+        const ease = smoothStep(progress);
         targetX = leftTrack + (rightTrack - leftTrack) * ease; // Kiri ke Kanan
-        // Posisikan sedikit ke atas di ruang kosong antar-section
-        targetY = achievementsRect.top - 65;
+        targetY = achievementsRect.top - 65; // Ruang kosong di atas heading
       }
       // 7. SECTION 5 (SERTIFIKASI) + KONTAK (BERAKHIR DI KANAN!)
       else {
-        targetX = rightTrack; // Berpindah ke Kanan dan BERAKHIR DI KANAN!
+        targetX = rightTrack; // Berakhir di KANAN!
         if (footerRect && footerRect.top < vh) {
-          // Berhenti aman di atas garis footer di margin kanan
           targetY = Math.min(vh * 0.45, footerRect.top - 240);
         } else {
           targetY = vh * 0.45;
@@ -230,13 +229,11 @@ export function ScrollOrb3D() {
       }
     };
 
-    window.addEventListener("scroll", updateTargetPosition, { passive: true });
-    window.addEventListener("resize", updateTargetPosition);
-    updateTargetPosition();
+    calculateTarget();
     currentX = targetX;
     currentY = targetY;
 
-    // 6. Animation Render Loop (Continuous 60 FPS Silky-Smooth Lerp)
+    // 6. Animation Render Loop (Continuous 60 FPS Silky-Smooth Liquid Lerp)
     let animationFrameId: number;
     let isVisible = true;
     let clock = new THREE.Clock();
@@ -245,9 +242,13 @@ export function ScrollOrb3D() {
       if (!isVisible) return;
       const elapsed = clock.getElapsedTime();
 
-      // Smooth buttery lerp for position
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
+      // Recalculate target position continuously every frame for 100% responsiveness
+      calculateTarget();
+
+      // Buttery smooth liquid lerp (damping factor 0.065)
+      const lerpSpeed = 0.065;
+      currentX += (targetX - currentX) * lerpSpeed;
+      currentY += (targetY - currentY) * lerpSpeed;
       container.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
 
       // Measure scroll delta for physical rolling
@@ -256,7 +257,10 @@ export function ScrollOrb3D() {
       lastScrollY = currentScrollY;
 
       rollRotationX += scrollDelta * 0.005;
-      rollRotationZ -= scrollDelta * 0.003;
+
+      // Realistic horizontal rolling momentum
+      const horizontalDelta = targetX - currentX;
+      rollRotationZ -= horizontalDelta * 0.0008;
 
       // Inertia damping for drag
       if (!isDragging) {
@@ -300,8 +304,6 @@ export function ScrollOrb3D() {
     return () => {
       cancelAnimationFrame(animationFrameId);
       document.removeEventListener("visibilitychange", onVisibilityChange);
-      window.removeEventListener("scroll", updateTargetPosition);
-      window.removeEventListener("resize", updateTargetPosition);
       canvas.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
