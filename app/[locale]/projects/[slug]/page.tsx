@@ -8,6 +8,7 @@ import { GithubIcon } from "@/components/common/icons";
 import { Metadata } from "next";
 import { ClickableMedia } from "@/components/common/clickable-image";
 import { ProjectMediaCarousel } from "@/components/project/project-media-carousel";
+import { ProjectVideoPlayer } from "@/components/project/project-video-player";
 
 function isVideoUrl(url: string) {
   if (!url) return false;
@@ -115,24 +116,12 @@ export default async function ProjectDetailPage({
 
         {/* Cover Hero Image or Video Demo */}
         {project.video_url ? (
-          <div className="mb-12">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-accent text-bg-base font-mono text-[10px] font-bold uppercase tracking-wider">
-                <Video className="w-3 h-3" />
-                <span>VIDEO DEMO</span>
-              </span>
-              <span className="font-mono text-xs text-text-muted">
-                {locale === "en" ? "Interactive Demo Preview" : "Pratinjau Video Interaktif"}
-              </span>
-            </div>
-            <div className="w-full rounded border border-border-subtle bg-bg-base overflow-hidden shadow-sm">
-              <ClickableMedia
-                src={project.video_url}
-                alt={`${project.title} Video Demo`}
-                aspectRatioClassName="aspect-video"
-              />
-            </div>
-          </div>
+          <ProjectVideoPlayer
+            videoUrl={project.video_url}
+            posterUrl={project.cover_image_url}
+            title={project.title}
+            locale={locale}
+          />
         ) : project.cover_image_url ? (
           <div className="w-full rounded border border-border-subtle bg-bg-elevated overflow-hidden mb-12 shadow-sm">
             <ClickableMedia

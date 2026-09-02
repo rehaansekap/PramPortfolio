@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
-import { X, ChevronLeft, ChevronRight, Video, Maximize2 } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Video } from "lucide-react";
 
 export interface MediaItem {
   url: string;
@@ -82,7 +82,7 @@ export function MediaLightbox({
       role="dialog"
       aria-modal="true"
       aria-label="Media Preview Lightbox"
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8 animate-in fade-in duration-200 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/98 backdrop-blur-xl p-4 sm:p-12 animate-in fade-in duration-200 select-none"
       onClick={(e) => {
         // Close if clicking outside the media container
         if (e.target === e.currentTarget) {
@@ -90,9 +90,9 @@ export function MediaLightbox({
         }
       }}
     >
-      {/* Top HUD Bar */}
-      <div className="absolute top-4 left-4 right-4 sm:top-6 sm:left-8 sm:right-8 flex items-center justify-between pointer-events-none z-10">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 border border-white/10 backdrop-blur-md font-mono text-xs text-white/90 shadow-lg pointer-events-auto">
+      {/* HUD Info: Top Floating Counter */}
+      {total > 1 && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900/80 border border-white/15 backdrop-blur-md font-mono text-xs text-white/90 shadow-lg pointer-events-none z-20">
           {isVideo && <Video className="w-3.5 h-3.5 text-accent" />}
           <span className="font-semibold tracking-wider">
             {String(currentIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -103,89 +103,88 @@ export function MediaLightbox({
             </span>
           )}
         </div>
+      )}
 
-        {/* Close Button */}
+      {/* Main Media Wrapper: Centers content and positions controls tight to the image */}
+      <div
+        className="relative inline-flex items-center justify-center max-w-[88vw] sm:max-w-4xl max-h-[84vh]"
+        onClick={(e) => {
+          // Clicking the wrapper itself (around margins) closes
+          if (e.target === e.currentTarget) {
+            onClose();
+          }
+        }}
+      >
+        {/* Close Button X: Positioned strictly on the top-right corner of the image/video */}
         <button
           type="button"
           onClick={onClose}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 hover:bg-white/20 border border-white/10 backdrop-blur-md font-mono text-xs text-white/90 hover:text-white transition-all shadow-lg pointer-events-auto group"
+          className="absolute -top-3.5 -right-3.5 z-40 p-2 sm:p-2.5 rounded-full bg-neutral-900 border border-white/25 text-white hover:bg-white hover:text-black shadow-2xl transition-all hover:scale-110 cursor-pointer group"
           title="Tutup (Esc)"
-          aria-label="Close lightbox"
+          aria-label="Tutup pratinjau"
         >
-          <span className="text-[10px] text-white/50 group-hover:text-white/80 transition-colors">ESC</span>
-          <X className="w-4 h-4 text-white" />
+          <X className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
         </button>
-      </div>
 
-      {/* Navigation Buttons (if > 1 items) */}
-      {total > 1 && (
-        <>
+        {/* Previous Button: Positioned closely beside the left side of the image */}
+        {total > 1 && (
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               handlePrev();
             }}
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-3 sm:p-4 rounded-full bg-black/60 hover:bg-black/90 border border-white/10 hover:border-white/30 text-white transition-all shadow-2xl z-20 group"
+            className="absolute -left-4 sm:-left-14 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 rounded-full bg-neutral-900/90 hover:bg-white hover:text-black border border-white/20 text-white transition-all shadow-2xl hover:scale-105 cursor-pointer group"
             title="Sebelumnya (Panah Kiri)"
             aria-label="Previous media"
           >
-            <ChevronLeft className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-0.5 transition-transform" />
           </button>
+        )}
 
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNext();
-            }}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-3 sm:p-4 rounded-full bg-black/60 hover:bg-black/90 border border-white/10 hover:border-white/30 text-white transition-all shadow-2xl z-20 group"
-            title="Berikutnya (Panah Kanan)"
-            aria-label="Next media"
-          >
-            <ChevronRight className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
-          </button>
-        </>
-      )}
-
-      {/* Media Centerpiece */}
-      <div
-        className="relative max-w-5xl max-h-[82vh] w-full h-full flex items-center justify-center"
-        onClick={(e) => {
-          // Allow clicking outside the actual media to dismiss
-          if (e.target === e.currentTarget) {
-            onClose();
-          }
-        }}
-      >
-        {isVideo ? (
-          <div className="relative max-w-full max-h-[82vh] rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-black">
+        {/* Media Frame (Image or Video) */}
+        <div className="relative rounded-lg overflow-hidden border border-white/15 shadow-2xl bg-black/90 max-h-[82vh] flex items-center justify-center">
+          {isVideo ? (
             <video
               key={currentItem.url}
               src={currentItem.url}
               controls
               autoPlay
               playsInline
-              className="max-w-full max-h-[80vh] w-auto h-auto object-contain"
+              className="max-w-[85vw] sm:max-w-4xl max-h-[80vh] w-auto h-auto object-contain bg-black"
             >
-              Browser Anda tidak mendukung pemutar video ini.
+              Browser Anda tidak mendukung pemutar video.
             </video>
-          </div>
-        ) : (
-          <div className="relative max-w-full max-h-[82vh] flex items-center justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+          ) : (
+            /* eslint-disable-next-line @next/next/no-img-element */
             <img
               key={currentItem.url}
               src={currentItem.url}
               alt={currentItem.alt || "Pratinjau Media"}
-              className="max-w-[92vw] max-h-[80vh] w-auto h-auto object-contain rounded-lg border border-white/10 shadow-2xl pointer-events-auto"
+              className="max-w-[85vw] sm:max-w-4xl max-h-[80vh] w-auto h-auto object-contain select-none"
             />
-          </div>
+          )}
+        </div>
+
+        {/* Next Button: Positioned closely beside the right side of the image */}
+        {total > 1 && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNext();
+            }}
+            className="absolute -right-4 sm:-right-14 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 rounded-full bg-neutral-900/90 hover:bg-white hover:text-black border border-white/20 text-white transition-all shadow-2xl hover:scale-105 cursor-pointer group"
+            title="Berikutnya (Panah Kanan)"
+            aria-label="Next media"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-0.5 transition-transform" />
+          </button>
         )}
       </div>
 
       {/* Bottom Hint */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[11px] text-white/50 pointer-events-none text-center">
+      <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 font-mono text-[11px] text-white/50 pointer-events-none text-center">
         {total > 1 ? "Gunakan panah kiri / kanan untuk berpindah • Klik di luar untuk keluar" : "Klik di luar gambar atau tekan Esc untuk keluar"}
       </div>
     </div>
