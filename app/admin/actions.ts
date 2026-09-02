@@ -21,6 +21,9 @@ export async function saveProfile(profile: Partial<Profile>) {
     }
 
     revalidatePath("/[locale]", "layout");
+    revalidatePath("/[locale]", "page");
+    revalidatePath("/[locale]/about", "page");
+    revalidatePath("/admin/profile", "page");
     return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message };

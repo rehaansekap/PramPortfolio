@@ -83,7 +83,7 @@ export default async function AboutPage({
           <div className="md:col-span-5 flex justify-center">
             <div className="relative w-64 h-80 rounded border border-border-subtle bg-bg-elevated overflow-hidden shadow-sm">
               <Image
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+                src={profile.photo_about_url || "/images/about/profile-about.jpg"}
                 alt={profile.name}
                 fill
                 priority

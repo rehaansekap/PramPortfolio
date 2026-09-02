@@ -170,7 +170,7 @@ export function HeroSection({ profile }: HeroSectionProps) {
               {/* Image Container with Solid Base & Clean Border */}
               <div className="relative w-full h-full rounded bg-bg-base overflow-hidden border border-border-subtle group-hover:border-border-hover transition-colors shadow-sm">
                 <Image
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                  src={profile.photo_hero_url || "/images/hero/profile.jpg"}
                   alt={profile.name}
                   fill
                   priority
