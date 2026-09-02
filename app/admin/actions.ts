@@ -1,12 +1,12 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { getAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
 import { Profile, Project, Experience, Education, Skill, Certification } from "@/types/portfolio";
 
 export async function saveProfile(profile: Partial<Profile>) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     const { data: existing } = await supabase.from("profiles").select("id").limit(1).maybeSingle();
 
     if (existing) {
@@ -29,7 +29,7 @@ export async function saveProfile(profile: Partial<Profile>) {
 
 export async function saveProject(project: Partial<Project>) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
 
     if (project.id && !project.id.startsWith("proj-")) {
       const { error } = await supabase
@@ -53,7 +53,7 @@ export async function saveProject(project: Partial<Project>) {
 
 export async function toggleFeaturedProject(id: string, is_featured: boolean) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     const { error } = await supabase
       .from("projects")
       .update({ is_featured })
@@ -69,7 +69,7 @@ export async function toggleFeaturedProject(id: string, is_featured: boolean) {
 
 export async function deleteProject(id: string) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     const { error } = await supabase.from("projects").delete().eq("id", id);
     if (error) throw error;
 
@@ -82,7 +82,7 @@ export async function deleteProject(id: string) {
 
 export async function saveExperience(experience: Partial<Experience>) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     if (experience.id && !experience.id.startsWith("exp-")) {
       const { error } = await supabase
         .from("experiences")
@@ -104,7 +104,7 @@ export async function saveExperience(experience: Partial<Experience>) {
 
 export async function deleteExperience(id: string) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     const { error } = await supabase.from("experiences").delete().eq("id", id);
     if (error) throw error;
 
@@ -118,7 +118,7 @@ export async function deleteExperience(id: string) {
 
 export async function saveEducation(education: Partial<Education>) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     if (education.id && !education.id.startsWith("edu-")) {
       const { error } = await supabase
         .from("educations")
@@ -141,7 +141,7 @@ export async function saveEducation(education: Partial<Education>) {
 
 export async function deleteEducation(id: string) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     const { error } = await supabase.from("educations").delete().eq("id", id);
     if (error) throw error;
 
@@ -155,7 +155,7 @@ export async function deleteEducation(id: string) {
 
 export async function saveSkill(skill: Partial<Skill>) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     if (skill.id && !skill.id.startsWith("sk-")) {
       const { error } = await supabase
         .from("skills")
@@ -177,7 +177,7 @@ export async function saveSkill(skill: Partial<Skill>) {
 
 export async function deleteSkill(id: string) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     const { error } = await supabase.from("skills").delete().eq("id", id);
     if (error) throw error;
 
@@ -190,7 +190,7 @@ export async function deleteSkill(id: string) {
 
 export async function saveCertification(certification: Partial<Certification>) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     if (certification.id && !certification.id.startsWith("cert-")) {
       const { error } = await supabase
         .from("certifications")
@@ -213,7 +213,7 @@ export async function saveCertification(certification: Partial<Certification>) {
 
 export async function deleteCertification(id: string) {
   try {
-    const supabase = await createClient();
+    const supabase = await getAdminClient();
     const { error } = await supabase.from("certifications").delete().eq("id", id);
     if (error) throw error;
 

@@ -147,7 +147,22 @@ body[data-lightbox-open="true"] [data-scroll-orb] {
   border-color: var(--border-hover) !important;
 }
 
+.swal2-container {
+  z-index: 99999 !important;
+}
+
 .swal2-icon {
   margin: 1rem auto 0.75rem auto !important;
   transform: scale(0.85) !important;
+}
+
+.pram-swal-close {
+  color: var(--text-muted) !important;
+  font-family: var(--font-jetbrains-mono), monospace !important;
+  font-size: 1.25rem !important;
+  transition: color 0.15s ease !important;
+}
+
+.pram-swal-close:hover {
+  color: var(--text-primary) !important;
 }

@@ -1,4 +1,4 @@
-import Swal, { SweetAlertOptions } from "sweetalert2";
+import Swal from "sweetalert2";
 
 /**
  * Custom Monochrome SweetAlert2 Configuration
@@ -11,16 +11,14 @@ const customSwal = Swal.mixin({
     htmlContainer: "pram-swal-html",
     confirmButton: "pram-swal-confirm",
     cancelButton: "pram-swal-cancel",
+    closeButton: "pram-swal-close",
     actions: "pram-swal-actions",
   },
   buttonsStyling: false,
-  backdrop: "rgba(0, 0, 0, 0.7)",
-  showClass: {
-    popup: "animate-in fade-in zoom-in-95 duration-150",
-  },
-  hideClass: {
-    popup: "animate-out fade-out zoom-out-95 duration-150",
-  },
+  backdrop: "rgba(0, 0, 0, 0.75)",
+  allowOutsideClick: true,
+  allowEscapeKey: true,
+  showCloseButton: true,
 });
 
 interface ConfirmOptions {
@@ -104,6 +102,8 @@ export async function showError(title: string, text?: string): Promise<void> {
     icon: "error",
     iconColor: "#ef4444",
     confirmButtonText: "TUTUP",
+    allowOutsideClick: true,
+    allowEscapeKey: true,
   });
 }
 
