@@ -8,15 +8,23 @@ import { BilingualInput } from "@/components/admin/bilingual-input";
 import { MarkdownEditor } from "@/components/admin/markdown-editor";
 import { ImageUploader } from "@/components/admin/image-uploader";
 import { MediaGalleryManager } from "@/components/admin/media-gallery-manager";
+import { showSuccess, showError } from "@/lib/sweetalert";
 import { Loader2, Save, ArrowLeft, Check, Video } from "lucide-react";
 import Link from "next/link";
 
 interface ProjectFormProps {
   initialProject?: Project;
   isNew?: boolean;
+  onSuccess?: (savedProject: Project) => void;
+  onCancel?: () => void;
 }
 
-export function ProjectForm({ initialProject, isNew = false }: ProjectFormProps) {
+export function ProjectForm({
+  initialProject,
+  isNew = false,
+  onSuccess,
+  onCancel,
+}: ProjectFormProps) {
   const router = useRouter();
   const [project, setProject] = useState<Partial<Project>>(
     initialProject || {
@@ -80,28 +88,34 @@ export function ProjectForm({ initialProject, isNew = false }: ProjectFormProps)
 
     const res = await saveProject(project);
     if (res.success) {
-      setStatus({ type: "success", message: "Proyek berhasil disimpan!" });
-      setTimeout(() => {
-        router.push("/admin/projects");
-        router.refresh();
-      }, 800);
+      showSuccess("Proyek Berhasil Disimpan!");
+      if (onSuccess) {
+        onSuccess(project as Project);
+      } else {
+        setTimeout(() => {
+          router.push("/admin/projects");
+          router.refresh();
+        }, 800);
+      }
     } else {
-      setStatus({ type: "error", message: res.error || "Gagal menyimpan proyek" });
+      showError("Gagal Menyimpan Proyek", res.error);
       setSaving(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-      <div className="flex items-center justify-between">
-        <Link
-          href="/admin/projects"
-          className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-text-muted hover:text-text-primary transition-colors"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Kembali ke Daftar Proyek</span>
-        </Link>
-      </div>
+      {!onCancel && (
+        <div className="flex items-center justify-between">
+          <Link
+            href="/admin/projects"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-text-muted hover:text-text-primary transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Kembali ke Daftar Proyek</span>
+          </Link>
+        </div>
+      )}
 
       {status && (
         <div

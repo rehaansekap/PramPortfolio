@@ -7,6 +7,7 @@ import { BilingualInput } from "@/components/admin/bilingual-input";
 import { MarkdownEditor } from "@/components/admin/markdown-editor";
 import { ImageUploader } from "@/components/admin/image-uploader";
 import { CvUploader } from "@/components/admin/cv-uploader";
+import { showSuccess, showError } from "@/lib/sweetalert";
 import { Loader2, Check, Save } from "lucide-react";
 
 interface ProfileFormProps {
@@ -25,8 +26,10 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
 
     const res = await saveProfile(profile);
     if (res.success) {
+      showSuccess("Profil Berhasil Diperbarui!");
       setStatus({ type: "success", message: "Profil berhasil diperbarui!" });
     } else {
+      showError("Gagal Menyimpan Profil", res.error);
       setStatus({ type: "error", message: res.error || "Gagal menyimpan profil" });
     }
     setSaving(false);

@@ -1,5 +1,5 @@
 import { getCertifications } from "@/lib/data/queries";
-import { Award, ExternalLink } from "lucide-react";
+import { CertificationsManager } from "@/components/admin/certifications-manager";
 
 export default async function AdminCertificationsPage() {
   const certifications = await getCertifications();
@@ -13,62 +13,14 @@ export default async function AdminCertificationsPage() {
           <span>CERTIFICATIONS</span>
         </div>
         <h1 className="font-heading text-2xl sm:text-3xl font-bold text-text-primary">
-          Sertifikasi & Penghargaan
+          Sertifikasi & Lisensi Resmi
         </h1>
         <p className="mt-1 text-xs sm:text-sm text-text-secondary">
-          Daftar lisensi industri, kejuaraan lomba UI/UX, dan beasiswa.
+          Kelola lisensi keahlian industri, kejuaraan, tautan verifikasi online, dan file PDF sertifikat.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {certifications.map((cert) => (
-          <div
-            key={cert.id}
-            className="p-5 rounded border border-border-subtle bg-bg-base hover:border-border-hover transition-colors flex items-start justify-between gap-4"
-          >
-            <div className="flex items-start gap-3">
-              <div className="p-2 rounded bg-bg-elevated border border-border-subtle text-text-primary shrink-0">
-                <Award className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="font-heading font-bold text-sm text-text-primary">
-                  {cert.title}
-                </h3>
-                <p className="font-mono text-xs text-text-secondary mt-0.5">
-                  {cert.issuer} • {cert.issue_date}
-                </p>
-
-                {cert.attachments && cert.attachments.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {cert.attachments.map((att, idx) => (
-                      <a
-                        key={idx}
-                        href={att.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-bg-elevated font-mono text-[10px] text-text-primary hover:text-accent border border-border-subtle"
-                      >
-                        <span>📄 {att.title}</span>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {cert.credential_url && (
-              <a
-                href={cert.credential_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-1.5 rounded border border-border-subtle text-text-muted hover:text-text-primary transition-colors shrink-0"
-              >
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            )}
-          </div>
-        ))}
-      </div>
+      <CertificationsManager initialCertifications={certifications} />
     </div>
   );
 }

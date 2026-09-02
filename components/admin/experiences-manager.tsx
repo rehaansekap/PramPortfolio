@@ -6,6 +6,8 @@ import { saveExperience, deleteExperience } from "@/app/admin/actions";
 import { BilingualInput } from "@/components/admin/bilingual-input";
 import { AttachmentsManager } from "@/components/admin/attachments-manager";
 import { MediaGalleryManager } from "@/components/admin/media-gallery-manager";
+import { AdminModal } from "@/components/admin/admin-modal";
+import { confirmDelete, showSuccess, showError } from "@/lib/sweetalert";
 import { Plus, Trash2, Edit2, Check, Loader2, Briefcase, Users, BookOpen } from "lucide-react";
 
 interface ExperiencesManagerProps {
@@ -73,7 +75,7 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
 
     const res = await saveExperience(payload);
     if (res.success) {
-      setStatus("Pengalaman berhasil disimpan!");
+      showSuccess("Pengalaman Berhasil Disimpan!");
       setEditingExp(null);
       // Update local state
       if (payload.id) {
@@ -84,16 +86,24 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
         setExperiences((prev) => [...prev, { ...payload, id: `exp-${Date.now()}` } as Experience]);
       }
     } else {
-      setStatus(`Gagal: ${res.error}`);
+      showError("Gagal Menyimpan", res.error);
     }
     setSaving(false);
   };
 
   const handleDelete = async (id: string, title: string) => {
-    if (!confirm(`Hapus pengalaman "${title}"?`)) return;
+    const confirmed = await confirmDelete({
+      title: "Hapus Riwayat Pengalaman?",
+      text: `Apakah Anda yakin ingin menghapus "${title}"? Tindakan ini tidak dapat dibatalkan.`,
+    });
+    if (!confirmed) return;
+
     const res = await deleteExperience(id);
     if (res.success) {
       setExperiences((prev) => prev.filter((e) => e.id !== id));
+      showSuccess("Pengalaman Berhasil Dihapus!");
+    } else {
+      showError("Gagal Menghapus", res.error);
     }
   };
 
@@ -121,24 +131,17 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
         </div>
       )}
 
-      {/* Editor Modal / Drawer if editing */}
-      {editingExp && (
-        <form
-          onSubmit={handleSave}
-          className="p-6 rounded border border-border-subtle bg-bg-elevated/40 flex flex-col gap-6 shadow-sm animate-in fade-in"
-        >
-          <div className="flex items-center justify-between pb-3 border-b border-border-subtle font-mono">
-            <span className="font-bold text-sm text-text-primary">
-              {editingExp.id ? "EDIT PENGALAMAN" : "TAMBAH PENGALAMAN BARU"}
-            </span>
-            <button
-              type="button"
-              onClick={() => setEditingExp(null)}
-              className="text-text-muted hover:text-text-primary text-xs"
-            >
-              BATAL
-            </button>
-          </div>
+      {/* Editor Modal */}
+      <AdminModal
+        isOpen={!!editingExp}
+        onClose={() => setEditingExp(null)}
+        title={editingExp?.id ? "EDIT RIWAYAT PENGALAMAN" : "TAMBAH PENGALAMAN BARU"}
+        subtitle="Kelola detail posisi, organisasi, media dokumentasi, dan lampiran PDF"
+        badgeText={editingExp?.id ? "UPDATE RECORD" : "NEW RECORD"}
+        maxWidthClassName="max-w-4xl"
+      >
+        {editingExp && (
+          <form onSubmit={handleSave} className="flex flex-col gap-6">
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex flex-col gap-1.5">
@@ -327,7 +330,8 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
             </button>
           </div>
         </form>
-      )}
+        )}
+      </AdminModal>
 
       {/* List Table */}
       <div className="rounded border border-border-subtle bg-bg-base overflow-hidden">

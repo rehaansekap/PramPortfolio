@@ -109,6 +109,116 @@ export async function deleteExperience(id: string) {
     if (error) throw error;
 
     revalidatePath("/[locale]", "layout");
+    revalidatePath("/[locale]/about", "page");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
+export async function saveEducation(education: Partial<Education>) {
+  try {
+    const supabase = await createClient();
+    if (education.id && !education.id.startsWith("edu-")) {
+      const { error } = await supabase
+        .from("educations")
+        .update(education)
+        .eq("id", education.id);
+      if (error) throw error;
+    } else {
+      const { id, ...newEdu } = education;
+      const { error } = await supabase.from("educations").insert([newEdu]);
+      if (error) throw error;
+    }
+
+    revalidatePath("/[locale]", "layout");
+    revalidatePath("/[locale]/about", "page");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
+export async function deleteEducation(id: string) {
+  try {
+    const supabase = await createClient();
+    const { error } = await supabase.from("educations").delete().eq("id", id);
+    if (error) throw error;
+
+    revalidatePath("/[locale]", "layout");
+    revalidatePath("/[locale]/about", "page");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
+export async function saveSkill(skill: Partial<Skill>) {
+  try {
+    const supabase = await createClient();
+    if (skill.id && !skill.id.startsWith("sk-")) {
+      const { error } = await supabase
+        .from("skills")
+        .update(skill)
+        .eq("id", skill.id);
+      if (error) throw error;
+    } else {
+      const { id, ...newSkill } = skill;
+      const { error } = await supabase.from("skills").insert([newSkill]);
+      if (error) throw error;
+    }
+
+    revalidatePath("/[locale]", "layout");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
+export async function deleteSkill(id: string) {
+  try {
+    const supabase = await createClient();
+    const { error } = await supabase.from("skills").delete().eq("id", id);
+    if (error) throw error;
+
+    revalidatePath("/[locale]", "layout");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
+export async function saveCertification(certification: Partial<Certification>) {
+  try {
+    const supabase = await createClient();
+    if (certification.id && !certification.id.startsWith("cert-")) {
+      const { error } = await supabase
+        .from("certifications")
+        .update(certification)
+        .eq("id", certification.id);
+      if (error) throw error;
+    } else {
+      const { id, ...newCert } = certification;
+      const { error } = await supabase.from("certifications").insert([newCert]);
+      if (error) throw error;
+    }
+
+    revalidatePath("/[locale]", "layout");
+    revalidatePath("/[locale]/about", "page");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
+export async function deleteCertification(id: string) {
+  try {
+    const supabase = await createClient();
+    const { error } = await supabase.from("certifications").delete().eq("id", id);
+    if (error) throw error;
+
+    revalidatePath("/[locale]", "layout");
+    revalidatePath("/[locale]/about", "page");
     return { success: true };
   } catch (err: any) {
     return { success: false, error: err.message };
