@@ -78,13 +78,11 @@ export function ExperienceHighlight({ experiences }: ExperienceHighlightProps) {
                     </div>
 
                     {/* Bullet descriptions */}
-                    <ul className="mt-4 space-y-1.5 text-sm text-text-secondary leading-relaxed">
+                    <ul className="mt-4 space-y-2 text-sm text-text-secondary leading-relaxed">
                       {descriptions.map((desc, dIdx) => (
-                        <li key={dIdx} className="flex items-start gap-2">
-                          <span className="text-text-muted mt-1 select-none font-mono">
-                            ›
-                          </span>
-                          <span>{desc}</span>
+                        <li key={dIdx} className="flex items-start gap-2.5">
+                          <span className="text-text-secondary select-none font-bold text-base leading-none mt-0.5 shrink-0">•</span>
+                          <span className="flex-1">{desc}</span>
                         </li>
                       ))}
                     </ul>

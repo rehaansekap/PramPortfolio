@@ -54,9 +54,9 @@ export default async function AdminEducationsPage() {
               <div className="mt-4 pt-3 border-t border-border-subtle/50 text-xs text-text-secondary">
                 <ul className="space-y-1">
                   {edu.description_id.map((d, i) => (
-                    <li key={i} className="flex items-start gap-1.5">
-                      <span className="text-text-muted font-mono">›</span>
-                      <span>{d}</span>
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-text-muted select-none font-bold text-sm leading-none mt-0.5 shrink-0">•</span>
+                      <span className="flex-1">{d}</span>
                     </li>
                   ))}
                 </ul>

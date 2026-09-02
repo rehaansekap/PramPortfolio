@@ -178,11 +178,9 @@ export default async function AboutPage({
                   {bullets.length > 0 && (
                     <ul className="mt-4 pt-4 border-t border-border-subtle/60 space-y-1.5 text-sm text-text-secondary">
                       {bullets.map((b, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="text-text-muted font-mono select-none">
-                            ›
-                          </span>
-                          <span>{b}</span>
+                        <li key={idx} className="flex items-start gap-2.5">
+                          <span className="text-text-secondary select-none font-bold text-base leading-none mt-0.5 shrink-0">•</span>
+                          <span className="flex-1">{b}</span>
                         </li>
                       ))}
                     </ul>
@@ -237,11 +235,9 @@ export default async function AboutPage({
 
                     <ul className="mt-4 space-y-1.5 text-sm text-text-secondary">
                       {bullets.map((b, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="text-text-muted font-mono select-none">
-                            ›
-                          </span>
-                          <span>{b}</span>
+                        <li key={idx} className="flex items-start gap-2.5">
+                          <span className="text-text-secondary select-none font-bold text-base leading-none mt-0.5 shrink-0">•</span>
+                          <span className="flex-1">{b}</span>
                         </li>
                       ))}
                     </ul>
@@ -310,11 +306,9 @@ export default async function AboutPage({
 
                       <ul className="mt-4 space-y-1.5 text-sm text-text-secondary">
                         {bullets.map((b, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className="text-text-muted font-mono select-none">
-                              ›
-                            </span>
-                            <span>{b}</span>
+                          <li key={idx} className="flex items-start gap-2.5">
+                            <span className="text-text-secondary select-none font-bold text-base leading-none mt-0.5 shrink-0">•</span>
+                            <span className="flex-1">{b}</span>
                           </li>
                         ))}
                       </ul>
