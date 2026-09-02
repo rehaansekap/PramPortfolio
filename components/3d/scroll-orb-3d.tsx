@@ -15,7 +15,7 @@ export function ScrollOrb3D() {
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
-    if (typeof window !== "undefined" && window.innerWidth < 768) return;
+    if (typeof window !== "undefined" && window.innerWidth < 1024) return;
 
     // 1. Scene & Camera
     const scene = new THREE.Scene();
@@ -339,7 +339,7 @@ export function ScrollOrb3D() {
     <div
       ref={containerRef}
       data-scroll-orb
-      className="hidden md:block fixed top-0 left-0 z-30 pointer-events-auto cursor-grab active:cursor-grabbing w-[180px] h-[180px] select-none touch-none will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(255,255,255,0.06)] group transition-opacity duration-200"
+      className="hidden lg:block fixed top-0 left-0 z-30 pointer-events-auto cursor-grab active:cursor-grabbing w-[180px] h-[180px] select-none touch-none will-change-transform drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_15px_30px_rgba(255,255,255,0.06)] group transition-opacity duration-200"
       title="Bola 3D Interaktif — Klik & drag untuk memutar 360°!"
     >
       <canvas
