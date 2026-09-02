@@ -46,16 +46,17 @@ export function AboutSnapshot({ profile }: AboutSnapshotProps) {
   return (
     <section id="about-snapshot" className="py-20 sm:py-28 border-b border-border-subtle">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <MotionWrapper>
-          <SectionHeading
-            number={t("sectionNumber")}
-            title={t("heading")}
-          />
-        </MotionWrapper>
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          {/* Main Bio paragraph */}
+          {/* Left Column: Section Header & Bio */}
           <div className="lg:col-span-6 flex flex-col items-start">
+            <MotionWrapper>
+              <SectionHeading
+                number={t("sectionNumber")}
+                title={t("heading")}
+                className="mb-8"
+              />
+            </MotionWrapper>
+
             <MotionWrapper delay={0.1}>
               <p className="text-lg sm:text-xl text-text-primary leading-relaxed font-sans font-normal">
                 {bioShort}
