@@ -347,7 +347,7 @@ export function ScrollOrb3D() {
       />
 
       {/* Floating mini status badge */}
-      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-[9px] px-2 py-0.5 rounded bg-bg-base/90 border border-border-subtle text-text-primary whitespace-nowrap shadow-xs backdrop-blur-sm pointer-events-none">
+      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-[9px] px-2 py-0.5 rounded bg-bg-base border border-border-subtle text-text-primary whitespace-nowrap shadow-xs pointer-events-none">
         DRAG 360°
       </div>
     </div>

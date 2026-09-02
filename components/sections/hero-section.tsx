@@ -178,10 +178,10 @@ export function HeroSection({ profile }: HeroSectionProps) {
                   className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
                 {/* Tech Vignette & Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-base/90 via-transparent to-transparent opacity-60 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
                 {/* Floating Bottom Center Role Tag */}
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-bg-base/90 border border-border-subtle px-3 py-1 rounded font-mono text-[10px] text-text-primary font-bold tracking-widest uppercase backdrop-blur-sm shadow-xs whitespace-nowrap">
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-bg-base border border-border-subtle px-3 py-1 rounded font-mono text-[10px] text-text-primary font-bold tracking-widest uppercase shadow-md whitespace-nowrap z-10">
                   FULL-STACK // DEV
                 </div>
               </div>

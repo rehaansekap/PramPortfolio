@@ -42,7 +42,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
           )}
           <div className="absolute top-3 right-3">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-bg-base/95 border border-border-subtle text-text-primary shadow-xs backdrop-blur-sm">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-bg-base border border-border-subtle text-text-primary shadow-md">
               {project.category}
             </span>
           </div>
