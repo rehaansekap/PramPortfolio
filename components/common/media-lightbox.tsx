@@ -127,17 +127,17 @@ export function MediaLightbox({
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08, duration: 0.18 }}
-              className="flex items-center gap-2 mb-2.5 px-3.5 py-1 rounded-full bg-neutral-900/95 border border-white/20 backdrop-blur-md font-mono text-xs text-white/90 shadow-md self-center pointer-events-auto"
+              className="flex items-center gap-2 mb-2.5 px-3.5 py-1 rounded-full bg-neutral-900/95 border border-white/20 backdrop-blur-md font-mono text-xs text-white shadow-md self-center pointer-events-auto"
             >
-              {isVideo && <Video className="w-3.5 h-3.5 text-accent" />}
+              {isVideo && <Video className="w-3.5 h-3.5 text-emerald-400" />}
               {total > 1 && (
-                <span className="font-semibold tracking-wider text-accent">
+                <span className="font-bold tracking-wider text-white">
                   {String(currentIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
                 </span>
               )}
               {currentItem.alt && (
                 <span
-                  className={`text-white/85 font-medium truncate max-w-[260px] sm:max-w-[480px] ${
+                  className={`text-neutral-300 font-medium truncate max-w-[260px] sm:max-w-[480px] ${
                     total > 1 ? "border-l border-white/20 pl-2" : ""
                   }`}
                 >
@@ -241,7 +241,7 @@ export function MediaLightbox({
             </div>
 
             {/* Bottom Hint */}
-            <div className="mt-2.5 text-center font-mono text-[11px] text-white/50 pointer-events-none">
+            <div className="mt-2.5 text-center font-mono text-[11px] text-neutral-400 pointer-events-none">
               {total > 1
                 ? "Gunakan panah kiri / kanan untuk berpindah • Klik di luar untuk keluar"
                 : "Klik di luar gambar atau tekan Esc untuk keluar"}

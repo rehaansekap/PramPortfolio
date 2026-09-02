@@ -210,7 +210,7 @@ export function ProjectMediaCarousel({
 
                 {isThumbVideo && (
                   <div className="absolute bottom-1 left-1 px-1 py-0.2 rounded bg-black/70 font-mono text-[9px] text-white flex items-center gap-0.5">
-                    <Video className="w-2.5 h-2.5 text-accent" />
+                    <Video className="w-2.5 h-2.5 text-white" />
                   </div>
                 )}
               </motion.button>
