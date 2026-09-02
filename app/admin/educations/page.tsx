@@ -62,6 +62,22 @@ export default async function AdminEducationsPage() {
                 </ul>
               </div>
             )}
+
+            {edu.attachments && edu.attachments.length > 0 && (
+              <div className="mt-3 pt-2.5 border-t border-border-subtle/40 flex flex-wrap gap-2">
+                {edu.attachments.map((att, idx) => (
+                  <a
+                    key={idx}
+                    href={att.file_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-bg-elevated font-mono text-[11px] text-text-primary hover:text-accent border border-border-subtle"
+                  >
+                    <span>📄 {att.title}</span>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -17,6 +17,8 @@ import {
   ExternalLink,
   MapPin,
   Calendar,
+  FileText,
+  Image as ImageIcon,
 } from "lucide-react";
 import { Metadata } from "next";
 
@@ -185,6 +187,61 @@ export default async function AboutPage({
                       ))}
                     </ul>
                   )}
+
+                  {/* Media / Documentation Photos */}
+                  {edu.media_urls && edu.media_urls.length > 0 && (
+                    <div className="mt-4">
+                      <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                        <ImageIcon className="w-3.5 h-3.5 text-accent" />
+                        <span>{locale === "en" ? "Media & Documentation:" : "Media & Dokumentasi:"}</span>
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                        {edu.media_urls.map((url, mIdx) => (
+                          <a
+                            key={mIdx}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative aspect-video rounded overflow-hidden border border-border-subtle hover:border-border-hover transition-colors group/media bg-bg-elevated block"
+                            title={locale === "en" ? "Click to view media" : "Klik untuk melihat media"}
+                          >
+                            <Image
+                              src={url}
+                              alt={`${edu.institution} media ${mIdx + 1}`}
+                              fill
+                              sizes="(max-width: 640px) 50vw, 240px"
+                              className="object-cover group-hover/media:scale-105 transition-transform duration-300"
+                            />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Downloadable PDF Attachments */}
+                  {edu.attachments && edu.attachments.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-border-subtle/70">
+                      <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                        <FileText className="w-3.5 h-3.5 text-accent" />
+                        <span>{locale === "en" ? "PDF Attachments:" : "Lampiran Dokumen (PDF):"}</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {edu.attachments.map((att, attIdx) => (
+                          <a
+                            key={attIdx}
+                            href={att.file_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-xs text-text-primary transition-all duration-150 shadow-xs group/att"
+                          >
+                            <Download className="w-3.5 h-3.5 text-accent group-hover/att:translate-y-0.5 transition-transform" />
+                            <span className="font-medium">{att.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -252,6 +309,61 @@ export default async function AboutPage({
                             {tag}
                           </span>
                         ))}
+                      </div>
+                    )}
+
+                    {/* Media / Documentation Photos */}
+                    {exp.media_urls && exp.media_urls.length > 0 && (
+                      <div className="mt-4">
+                        <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                          <ImageIcon className="w-3.5 h-3.5 text-accent" />
+                          <span>{locale === "en" ? "Media & Documentation:" : "Media & Dokumentasi:"}</span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                          {exp.media_urls.map((url, mIdx) => (
+                            <a
+                              key={mIdx}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="relative aspect-video rounded overflow-hidden border border-border-subtle hover:border-border-hover transition-colors group/media bg-bg-elevated block"
+                              title={locale === "en" ? "Click to view media" : "Klik untuk melihat media"}
+                            >
+                              <Image
+                                src={url}
+                                alt={`${exp.organization} media ${mIdx + 1}`}
+                                fill
+                                sizes="(max-width: 640px) 50vw, 240px"
+                                className="object-cover group-hover/media:scale-105 transition-transform duration-300"
+                              />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Downloadable PDF Attachments */}
+                    {exp.attachments && exp.attachments.length > 0 && (
+                      <div className="mt-4 pt-3 border-t border-border-subtle/70">
+                        <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                          <FileText className="w-3.5 h-3.5 text-accent" />
+                          <span>{locale === "en" ? "PDF Attachments:" : "Lampiran Dokumen (PDF):"}</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.attachments.map((att, attIdx) => (
+                            <a
+                              key={attIdx}
+                              href={att.file_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              download
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-xs text-text-primary transition-all duration-150 shadow-xs group/att"
+                            >
+                              <Download className="w-3.5 h-3.5 text-accent group-hover/att:translate-y-0.5 transition-transform" />
+                              <span className="font-medium">{att.title}</span>
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -325,6 +437,61 @@ export default async function AboutPage({
                           ))}
                         </div>
                       )}
+
+                      {/* Media / Documentation Photos */}
+                      {exp.media_urls && exp.media_urls.length > 0 && (
+                        <div className="mt-4">
+                          <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                            <ImageIcon className="w-3.5 h-3.5 text-accent" />
+                            <span>{locale === "en" ? "Media & Documentation:" : "Media & Dokumentasi:"}</span>
+                          </div>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                            {exp.media_urls.map((url, mIdx) => (
+                              <a
+                                key={mIdx}
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative aspect-video rounded overflow-hidden border border-border-subtle hover:border-border-hover transition-colors group/media bg-bg-elevated block"
+                                title={locale === "en" ? "Click to view media" : "Klik untuk melihat media"}
+                              >
+                                <Image
+                                  src={url}
+                                  alt={`${exp.organization} media ${mIdx + 1}`}
+                                  fill
+                                  sizes="(max-width: 640px) 50vw, 240px"
+                                  className="object-cover group-hover/media:scale-105 transition-transform duration-300"
+                                />
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Downloadable PDF Attachments */}
+                      {exp.attachments && exp.attachments.length > 0 && (
+                        <div className="mt-4 pt-3 border-t border-border-subtle/70">
+                          <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                            <FileText className="w-3.5 h-3.5 text-accent" />
+                            <span>{locale === "en" ? "PDF Attachments:" : "Lampiran Dokumen (PDF):"}</span>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.attachments.map((att, attIdx) => (
+                              <a
+                                key={attIdx}
+                                href={att.file_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                download
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-xs text-text-primary transition-all duration-150 shadow-xs group/att"
+                              >
+                                <Download className="w-3.5 h-3.5 text-accent group-hover/att:translate-y-0.5 transition-transform" />
+                                <span className="font-medium">{att.title}</span>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -385,6 +552,53 @@ export default async function AboutPage({
                       ))}
                     </div>
                   )}
+
+                  {/* Media / Documentation Photos */}
+                  {org.media_urls && org.media_urls.length > 0 && (
+                    <div className="mt-3">
+                      <div className="grid grid-cols-2 gap-2">
+                        {org.media_urls.map((url, mIdx) => (
+                          <a
+                            key={mIdx}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative aspect-video rounded overflow-hidden border border-border-subtle hover:border-border-hover transition-colors group/media bg-bg-elevated block"
+                            title={locale === "en" ? "Click to view media" : "Klik untuk melihat media"}
+                          >
+                            <Image
+                              src={url}
+                              alt={`${org.organization} media ${mIdx + 1}`}
+                              fill
+                              sizes="(max-width: 640px) 50vw, 200px"
+                              className="object-cover group-hover/media:scale-105 transition-transform duration-300"
+                            />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Downloadable PDF Attachments */}
+                  {org.attachments && org.attachments.length > 0 && (
+                    <div className="mt-3 pt-2.5 border-t border-border-subtle/70">
+                      <div className="flex flex-wrap gap-1.5">
+                        {org.attachments.map((att, attIdx) => (
+                          <a
+                            key={attIdx}
+                            href={att.file_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-[11px] text-text-primary transition-all duration-150 shadow-xs group/att"
+                          >
+                            <Download className="w-3 h-3 text-accent group-hover/att:translate-y-0.5 transition-transform" />
+                            <span className="font-medium truncate max-w-[150px]">{att.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -408,13 +622,34 @@ export default async function AboutPage({
                 key={cert.id}
                 className="p-5 rounded border border-border-subtle hover:border-border-hover bg-bg-base transition-colors flex items-start justify-between gap-4"
               >
-                <div>
-                  <h3 className="font-heading font-bold text-base text-text-primary">
-                    {cert.title}
-                  </h3>
-                  <p className="font-mono text-xs text-text-secondary mt-1">
-                    {cert.issuer} • {cert.issue_date}
-                  </p>
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-heading font-bold text-base text-text-primary">
+                      {cert.title}
+                    </h3>
+                    <p className="font-mono text-xs text-text-secondary mt-1">
+                      {cert.issuer} • {cert.issue_date}
+                    </p>
+                  </div>
+
+                  {/* Downloadable PDF Attachments */}
+                  {cert.attachments && cert.attachments.length > 0 && (
+                    <div className="mt-3 pt-2.5 border-t border-border-subtle/70 flex flex-wrap gap-1.5">
+                      {cert.attachments.map((att, attIdx) => (
+                        <a
+                          key={attIdx}
+                          href={att.file_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          download
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-[11px] text-text-primary transition-all duration-150 shadow-xs group/att"
+                        >
+                          <Download className="w-3 h-3 text-accent group-hover/att:translate-y-0.5 transition-transform" />
+                          <span className="font-medium">{att.title}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {cert.credential_url && (

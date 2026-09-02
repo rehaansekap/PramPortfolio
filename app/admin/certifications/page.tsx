@@ -37,6 +37,22 @@ export default async function AdminCertificationsPage() {
                 <p className="font-mono text-xs text-text-secondary mt-0.5">
                   {cert.issuer} • {cert.issue_date}
                 </p>
+
+                {cert.attachments && cert.attachments.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {cert.attachments.map((att, idx) => (
+                      <a
+                        key={idx}
+                        href={att.file_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-bg-elevated font-mono text-[10px] text-text-primary hover:text-accent border border-border-subtle"
+                      >
+                        <span>📄 {att.title}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 

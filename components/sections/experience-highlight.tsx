@@ -6,7 +6,8 @@ import { Link } from "@/i18n/routing";
 import { SectionHeading } from "@/components/common/section-heading";
 import { MotionWrapper } from "@/components/common/motion-wrapper";
 import { formatDate } from "@/lib/utils";
-import { ArrowRight, Briefcase } from "lucide-react";
+import { ArrowRight, Briefcase, FileText, Download, Image as ImageIcon } from "lucide-react";
+import Image from "next/image";
 
 interface ExperienceHighlightProps {
   experiences: Experience[];
@@ -98,6 +99,61 @@ export function ExperienceHighlight({ experiences }: ExperienceHighlightProps) {
                             {tag}
                           </span>
                         ))}
+                      </div>
+                    )}
+
+                    {/* Media / Documentation Photos */}
+                    {exp.media_urls && exp.media_urls.length > 0 && (
+                      <div className="mt-4">
+                        <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                          <ImageIcon className="w-3.5 h-3.5 text-accent" />
+                          <span>{locale === "en" ? "Media & Documentation:" : "Media & Dokumentasi:"}</span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                          {exp.media_urls.map((url, mIdx) => (
+                            <a
+                              key={mIdx}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="relative aspect-video rounded overflow-hidden border border-border-subtle hover:border-border-hover transition-colors group/media bg-bg-elevated block"
+                              title={locale === "en" ? "Click to view media" : "Klik untuk melihat media"}
+                            >
+                              <Image
+                                src={url}
+                                alt={`${exp.organization} media ${mIdx + 1}`}
+                                fill
+                                sizes="(max-width: 640px) 50vw, 240px"
+                                className="object-cover group-hover/media:scale-105 transition-transform duration-300"
+                              />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Downloadable PDF Attachments */}
+                    {exp.attachments && exp.attachments.length > 0 && (
+                      <div className="mt-4 pt-3 border-t border-border-subtle/70">
+                        <div className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted font-semibold uppercase tracking-wider mb-2">
+                          <FileText className="w-3.5 h-3.5 text-accent" />
+                          <span>{locale === "en" ? "PDF Attachments:" : "Lampiran Dokumen (PDF):"}</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.attachments.map((att, attIdx) => (
+                            <a
+                              key={attIdx}
+                              href={att.file_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              download
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-xs text-text-primary transition-all duration-150 shadow-xs group/att"
+                            >
+                              <Download className="w-3.5 h-3.5 text-accent group-hover/att:translate-y-0.5 transition-transform" />
+                              <span className="font-medium">{att.title}</span>
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>

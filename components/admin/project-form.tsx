@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import { BilingualInput } from "@/components/admin/bilingual-input";
 import { MarkdownEditor } from "@/components/admin/markdown-editor";
 import { ImageUploader } from "@/components/admin/image-uploader";
-import { Loader2, Save, ArrowLeft, Check } from "lucide-react";
+import { MediaGalleryManager } from "@/components/admin/media-gallery-manager";
+import { Loader2, Save, ArrowLeft, Check, Video } from "lucide-react";
 import Link from "next/link";
 
 interface ProjectFormProps {
@@ -33,6 +34,7 @@ export function ProjectForm({ initialProject, isNew = false }: ProjectFormProps)
       outcome_id: "",
       outcome_en: "",
       cover_image_url: "",
+      video_url: null,
       gallery_images: [],
       live_url: "",
       repo_url: "",
@@ -288,19 +290,54 @@ export function ProjectForm({ initialProject, isNew = false }: ProjectFormProps)
         </div>
       </div>
 
-      {/* Cover Image */}
+      {/* Cover Media: Image, Video Demo, and Gallery */}
       <div className="p-6 rounded border border-border-subtle bg-bg-elevated/30 flex flex-col gap-5">
         <h2 className="font-mono text-xs uppercase tracking-wider text-text-muted pb-2 border-b border-border-subtle font-semibold">
-          2. Cover Image (16:9)
+          2. Media Utama & Video Demo
         </h2>
 
         <ImageUploader
-          label="Cover Image Proyek"
+          label="Cover Image Proyek (16:9)"
           folder="projects"
           value={project.cover_image_url || ""}
           onChange={(url) => setProject({ ...project, cover_image_url: url })}
           aspectRatio="16/9"
         />
+
+        {/* Video Demo Input (No Size Limit) */}
+        <div className="flex flex-col gap-2 pt-3 border-t border-border-subtle">
+          <label className="font-mono text-xs font-semibold text-text-primary uppercase tracking-wider flex items-center gap-1.5">
+            <Video className="w-3.5 h-3.5 text-accent" />
+            <span>Video Demo Proyek (Opsional — Bebas Ukuran File)</span>
+          </label>
+          <input
+            type="text"
+            value={project.video_url || ""}
+            onChange={(e) => setProject({ ...project, video_url: e.target.value || null })}
+            placeholder="Masukkan URL Video langsung (e.g. https://domain.com/video.mp4)"
+            className="p-3 font-mono text-xs bg-bg-base border border-border-subtle rounded text-text-primary"
+          />
+          {project.video_url && (
+            <div className="relative aspect-video w-full max-w-md rounded overflow-hidden border border-border-subtle bg-bg-base mt-2">
+              <video
+                src={project.video_url}
+                controls
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Gallery Images & Videos */}
+        <div className="pt-3 border-t border-border-subtle">
+          <MediaGalleryManager
+            mediaUrls={project.gallery_images || []}
+            onChange={(urls) => setProject({ ...project, gallery_images: urls })}
+            label="Galeri Screenshot & Media Tambahan (Gambar / Video)"
+            folder="projects"
+            allowVideo={true}
+          />
+        </div>
       </div>
 
       {/* Short Description */}

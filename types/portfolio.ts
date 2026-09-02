@@ -20,6 +20,11 @@ export interface Profile {
   cv_file_url: string;
 }
 
+export interface Attachment {
+  title: string;
+  file_url: string;
+}
+
 export type ExperienceType = "work" | "organization" | "teaching";
 
 export interface Experience {
@@ -33,6 +38,8 @@ export interface Experience {
   description_id: string[];
   description_en: string[];
   category_tags: string[];
+  attachments?: Attachment[];
+  media_urls?: string[];
   is_highlighted: boolean;
   order: number;
 }
@@ -48,6 +55,8 @@ export interface Education {
   gpa: string | null;
   description_id: string[];
   description_en: string[];
+  attachments?: Attachment[];
+  media_urls?: string[];
   order: number;
 }
 
@@ -58,6 +67,7 @@ export interface Project {
   slug: string;
   title: string;
   cover_image_url: string;
+  video_url?: string | null;
   gallery_images: string[];
   short_description_id: string;
   short_description_en: string;
@@ -100,5 +110,6 @@ export interface Certification {
   issue_date: string;
   credential_url: string | null;
   badge_image_url: string | null;
+  attachments?: Attachment[];
   order: number;
 }

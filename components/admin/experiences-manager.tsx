@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Experience, ExperienceType } from "@/types/portfolio";
 import { saveExperience, deleteExperience } from "@/app/admin/actions";
 import { BilingualInput } from "@/components/admin/bilingual-input";
+import { AttachmentsManager } from "@/components/admin/attachments-manager";
+import { MediaGalleryManager } from "@/components/admin/media-gallery-manager";
 import { Plus, Trash2, Edit2, Check, Loader2, Briefcase, Users, BookOpen } from "lucide-react";
 
 interface ExperiencesManagerProps {
@@ -33,6 +35,8 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
       description_en: [],
       category_tags: ["Backend"],
       is_highlighted: false,
+      attachments: [],
+      media_urls: [],
       order: experiences.length + 1,
     });
     setDescIdInput("");
@@ -41,7 +45,11 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
   };
 
   const startEdit = (exp: Experience) => {
-    setEditingExp(exp);
+    setEditingExp({
+      ...exp,
+      attachments: exp.attachments || [],
+      media_urls: exp.media_urls || [],
+    });
     setDescIdInput(exp.description_id.join("\n"));
     setDescEnInput(exp.description_en.join("\n"));
     setTagsInput(exp.category_tags.join(", "));
@@ -59,6 +67,8 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
       description_id: descIdInput.split("\n").map((s) => s.trim()).filter(Boolean),
       description_en: descEnInput.split("\n").map((s) => s.trim()).filter(Boolean),
       category_tags: tagsInput.split(",").map((s) => s.trim()).filter(Boolean),
+      attachments: editingExp.attachments || [],
+      media_urls: editingExp.media_urls || [],
     };
 
     const res = await saveExperience(payload);
@@ -283,6 +293,22 @@ export function ExperiencesManager({ initialExperiences }: ExperiencesManagerPro
               </label>
             </div>
           </div>
+
+          {/* Media Photos / Documentation Gallery */}
+          <MediaGalleryManager
+            mediaUrls={editingExp.media_urls || []}
+            onChange={(urls) => setEditingExp({ ...editingExp, media_urls: urls })}
+            label="Media & Foto Dokumentasi"
+            folder="experiences"
+          />
+
+          {/* Downloadable PDF Attachments */}
+          <AttachmentsManager
+            attachments={editingExp.attachments || []}
+            onChange={(atts) => setEditingExp({ ...editingExp, attachments: atts })}
+            label="Lampiran Dokumen Resmi (PDF)"
+            folder="experience-documents"
+          />
 
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-border-subtle">
             <button

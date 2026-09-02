@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Certification } from "@/types/portfolio";
 import { SectionHeading } from "@/components/common/section-heading";
 import { MotionWrapper } from "@/components/common/motion-wrapper";
-import { Award, ExternalLink } from "lucide-react";
+import { Award, ExternalLink, Download, FileText } from "lucide-react";
 
 interface AchievementsStripProps {
   certifications: Certification[];
@@ -46,17 +46,38 @@ export function AchievementsStrip({ certifications }: AchievementsStripProps) {
                   </p>
                 </div>
 
-                {cert.credential_url && (
-                  <a
-                    href={cert.credential_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 pt-3 border-t border-border-subtle flex items-center gap-1.5 font-mono text-[11px] text-text-muted hover:text-text-primary transition-colors"
-                  >
-                    <span>Lihat Sertifikat</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                )}
+                <div>
+                  {/* Downloadable PDF Attachments */}
+                  {cert.attachments && cert.attachments.length > 0 && (
+                    <div className="mt-3 pt-2.5 border-t border-border-subtle/70 flex flex-wrap gap-1.5">
+                      {cert.attachments.map((att, attIdx) => (
+                        <a
+                          key={attIdx}
+                          href={att.file_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          download
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-bg-elevated hover:bg-bg-base border border-border-subtle hover:border-border-hover font-mono text-[11px] text-text-primary transition-all duration-150 shadow-xs group/att"
+                        >
+                          <Download className="w-3 h-3 text-accent group-hover/att:translate-y-0.5 transition-transform" />
+                          <span className="font-medium truncate max-w-[130px]">{att.title}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+
+                  {cert.credential_url && (
+                    <a
+                      href={cert.credential_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 pt-2.5 border-t border-border-subtle flex items-center gap-1.5 font-mono text-[11px] text-text-muted hover:text-text-primary transition-colors"
+                    >
+                      <span>Lihat Kredensial</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
               </div>
             </MotionWrapper>
           ))}

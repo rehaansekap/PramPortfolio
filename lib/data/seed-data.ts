@@ -53,6 +53,20 @@ export const initialExperiences: Experience[] = [
       "Authored comprehensive API documentation using Swagger",
     ],
     category_tags: ["Backend", "Laravel", "PostgreSQL", "Swagger"],
+    attachments: [
+      {
+        title: "Surat Keterangan Magang Oxioo.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+      {
+        title: "Laporan Capaian Kerja.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
+    media_urls: [
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    ],
     is_highlighted: true,
     order: 1,
   },
@@ -71,6 +85,15 @@ export const initialExperiences: Experience[] = [
       "UI/UX design, wireframe, and interactive prototypes for NEXTActions, TReats Buyer & Mitra",
     ],
     category_tags: ["UI/UX", "Figma", "Prototyping"],
+    attachments: [
+      {
+        title: "Sertifikat Magang UI-UX.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
+    media_urls: [
+      "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80",
+    ],
     is_highlighted: true,
     order: 2,
   },
@@ -171,6 +194,15 @@ export const initialExperiences: Experience[] = [
       "Workshops, training, and hackathons with a global developer community",
     ],
     category_tags: ["Community", "Frontend"],
+    attachments: [
+      {
+        title: "Sertifikat Anggota GDSC UPI.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
+    media_urls: [
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+    ],
     is_highlighted: false,
     order: 7,
   },
@@ -207,6 +239,15 @@ export const initialExperiences: Experience[] = [
       "Delivered graphic design and copywriting training",
     ],
     category_tags: ["Marketing", "Leadership", "Next.js"],
+    attachments: [
+      {
+        title: "SK Kepengurusan GenBI UPI.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
+    media_urls: [
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
+    ],
     is_highlighted: false,
     order: 9,
   },
@@ -236,6 +277,19 @@ export const initialEducations: Education[] = [
       "Participant of LIDM 2024 — Microteaching division",
       "Participant of HOLOGY 7.0 — UX Designer division",
     ],
+    attachments: [
+      {
+        title: "Transkrip Nilai Akademik UPI.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+      {
+        title: "Surat Keterangan Mahasiswa Aktif.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
+    media_urls: [
+      "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80",
+    ],
     order: 1,
   },
   {
@@ -256,6 +310,12 @@ export const initialEducations: Education[] = [
       "Modern frontend development with ReactJS & Tailwind CSS",
       "Backend engineering with Node.js, Express.js",
       "Database management: MongoDB & MySQL",
+    ],
+    attachments: [
+      {
+        title: "Sertifikat Kelulusan Bootcamp.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
     ],
     order: 2,
   },
@@ -328,6 +388,7 @@ export const initialProjects: Project[] = [
     slug: "qr-verification",
     title: "QR Verification System",
     cover_image_url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+    video_url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     gallery_images: [
       "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
@@ -725,6 +786,12 @@ export const initialCertifications: Certification[] = [
     issue_date: "2023",
     credential_url: null,
     badge_image_url: null,
+    attachments: [
+      {
+        title: "Sertifikat Juara 3 DIMASTI-AMLI.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
     order: 1,
   },
   {
@@ -734,6 +801,12 @@ export const initialCertifications: Certification[] = [
     issue_date: "2023",
     credential_url: null,
     badge_image_url: null,
+    attachments: [
+      {
+        title: "Piagam Penerima Beasiswa BI.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
     order: 2,
   },
   {
@@ -743,6 +816,12 @@ export const initialCertifications: Certification[] = [
     issue_date: "2024",
     credential_url: null,
     badge_image_url: null,
+    attachments: [
+      {
+        title: "Sertifikat Resmi MikroTik MTCNA.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
     order: 3,
   },
   {
@@ -752,6 +831,12 @@ export const initialCertifications: Certification[] = [
     issue_date: "2024",
     credential_url: null,
     badge_image_url: null,
+    attachments: [
+      {
+        title: "Sertifikat Kompetensi BNSP.pdf",
+        file_url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      },
+    ],
     order: 4,
   },
 ];
