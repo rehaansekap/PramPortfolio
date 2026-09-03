@@ -139,20 +139,3 @@ Database menggunakan Supabase (PostgreSQL) dengan skema relasional terstruktur:
    npm run start
    ```
 
----
-
-## **6. Deployment to Vercel (CI/CD Otomatis)**
-
-Proyek ini siap dan telah dioptimalkan untuk **Auto-Deployment** penuh melalui Vercel. Setiap kali Anda melakukan `git push` ke branch `main`, Vercel akan otomatis mendeteksi perubahan, melakukan build, dan memperbarui website secara live.
-
-### **Langkah-langkah Setup:**
-1. Kunjungi [vercel.com](https://vercel.com) dan login menggunakan akun GitHub Anda (`rehaansekap`).
-2. Di dashboard Vercel, klik tombol **"Add New..."** &rarr; pilih **"Project"**.
-3. Cari repositori **`PramPortfolio`**, lalu klik tombol **"Import"**.
-4. Pada bagian **Environment Variables**, masukkan 3 variabel wajib:
-   * `NEXT_PUBLIC_SUPABASE_URL` : URL proyek Supabase Anda
-   * `NEXT_PUBLIC_SUPABASE_ANON_KEY` : Anon Public Key Supabase Anda
-   * `ADMIN_PASSWORD` : Password rahasia untuk login ke `/admin/login`
-5. Klik **"Deploy"**.
-
-Setelah setup awal ini selesai, seluruh deployment di masa depan akan **berjalan 100% otomatis**: cukup jalankan `git push origin main`, dan website Anda akan ter-update otomatis dalam kurun waktu ~1 menit!
